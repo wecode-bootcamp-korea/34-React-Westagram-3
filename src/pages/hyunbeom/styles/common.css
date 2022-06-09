@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@400;600&display=swap");
+
+@import "./reset.css";
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --main-color: rgb(250, 250, 250);
+}
+:root {
+  --main-border: 1.5px solid #dbdbdb;
+}
+:root {
+  --gray: #dbdbdb;
+}
+
+.logo {
+  font-family: "Lobster", cursive;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.gray {
+  color: gray;
+  opacity: 50%;
+}
+
+.hidden {
+  visibility: hidden;
+}
