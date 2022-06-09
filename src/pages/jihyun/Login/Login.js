@@ -1,11 +1,7 @@
-import React from "react";
+import React from 'react';
 
-const LoginJihyun = () => {
-  return (
-    <div>
-      <h1>hello world</h1>
-    </div>
-  );
+const LoginJiHyun = () => {
+  return <div></div>;
 };
 
-export default Login;
+export default LoginJiHyun;

@@ -1,7 +1,7 @@
 import React from 'react';
 
-const MainJiHyun = () => {
+const LoginJrg = () => {
   return <div></div>;
 };
 
-export default MainJiHyun;
+export default LoginJrg;
