@@ -53,14 +53,6 @@
         outline: none;
       }
 
-      .emptyBtn {
-        background-color: #c0dffd;
-      }
-
-      .fullBtn {
-        background-color: #0095f6;
-      }
-
       & button {
         width: 270px;
         height: 35px;
@@ -69,6 +61,14 @@
         color: white;
         margin-top: 12px;
         cursor: pointer;
+      }
+
+      .emptyBtn {
+        background-color: #c0dffd;
+      }
+
+      .fullBtn {
+        background-color: #0095f6;
       }
     }
 

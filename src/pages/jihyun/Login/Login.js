@@ -42,7 +42,8 @@ const LoginJiHyun = () => {
     if (loginInfo.name !== '' && loginInfo.password !== '') {
       setBtnColor('fullBtn');
       setBtnAble(false);
-    } else {
+    }
+    if (loginInfo.name === '' || loginInfo.password === '') {
       setBtnColor('emptyBtn');
       setBtnAble(true);
     }
