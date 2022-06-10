@@ -1,22 +1,35 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './login.scss';
 
 const LoginYeJi = () => {
+  const navigate = useNavigate();
   const [userID, setUserID] = useState('');
   const handleIdInput = event => {
-    event.preventDefault();
     setUserID(event.target.value);
   };
 
-  console.log('id: ', userID);
-
-  const [userPW, setuserPW] = useState('');
+  const [userPW, setUserPW] = useState('');
   const handlePassInput = event => {
-    event.preventDefault();
-    setuserPW(event.target.value);
+    setUserPW(event.target.value);
   };
-  console.log('pw: ', userPW);
+
+  const [loginBtn, setloginBtn] = useState('rgba(0, 149, 246, 0.3)');
+  const [btnDisabled, setBtnDisabled] = useState('disabled');
+  const handleSubmit = e => {
+    e.preventDefault();
+    navigate('/main-yeji');
+  };
+  const handleCheange = () => {
+    if (userID.includes('@') && userPW.length >= 5) {
+      setloginBtn('#0095f6');
+      setBtnDisabled('');
+    } else {
+      setloginBtn('rgba(0, 149, 246, 0.3)');
+      setBtnDisabled('disabled');
+    }
+  };
+  useEffect(handleCheange, [userID, userPW]);
 
   return (
     <div class="login-wrap">
@@ -25,7 +38,7 @@ const LoginYeJi = () => {
           <Link to="/Main">Westagram</Link>
         </div>
         <div class="form-box">
-          <form id="loginForm">
+          <form id="loginForm" onSubmit={handleSubmit}>
             <div class="box">
               <input
                 type="text"
@@ -43,7 +56,12 @@ const LoginYeJi = () => {
               />
             </div>
             <div class="login-btn">
-              <button id="loginBtn" disabled>
+              <button
+                style={{ backgroundColor: loginBtn }}
+                id="loginBtn"
+                type="submit"
+                disabled={btnDisabled}
+              >
                 로그인
               </button>
             </div>
