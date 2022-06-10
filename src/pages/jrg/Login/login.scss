@@ -1,89 +1,89 @@
 .body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .wrapDiv {
-    background-color: white;
-    width:550px;
-    /* height: 650px; */
-    padding:10px;
+  background-color: white;
+  width: 550px;
+  /* height: 650px; */
+  padding: 10px;
 }
 
 .inLine {
-    border: 0.5px solid gray;
-    opacity:0.8;
-    /* width:500px;
+  border: 0.5px solid gray;
+  opacity: 0.8;
+  /* width:500px;
     height:600px; */
-    margin:auto;
-    display:flex;
-    flex-direction: column;
-    align-items: center;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .titleLogin {
-    font-family: 'Lobster', cursive;
-    font-size:60px;
-    margin:20px;
-    margin-bottom: 50px;
+  font-family: 'Lobster', cursive;
+  font-size: 60px;
+  margin: 20px;
+  margin-bottom: 50px;
 }
 
 .idInput {
-    width:380px;
-    height:40px;
-    margin:5px;
-    color: black;
-    background-color: #FAFAFA;
-    opacity: 0.9;
-    border: 0.5px solid grey;
-    font-weight:bold;
-    border-radius: 5px;
+  width: 380px;
+  height: 40px;
+  margin: 5px;
+  color: black;
+  background-color: #fafafa;
+  opacity: 0.9;
+  border: 0.5px solid grey;
+  font-weight: bold;
+  border-radius: 5px;
 }
 
 .pwInput {
-    width:380px;
-    height:40px;
-    margin: 5px;
-    color: black;
-    background-color: #FAFAFA;
-    opacity: 0.9;
-    border: 0.5px solid grey;
-    font-weight:bold;
-    border-radius: 5px;
+  width: 380px;
+  height: 40px;
+  margin: 5px;
+  color: black;
+  background-color: #fafafa;
+  opacity: 0.9;
+  border: 0.5px solid grey;
+  font-weight: bold;
+  border-radius: 5px;
 }
 
 .loginBtnUnactive {
-    width:380px;
-    height:40px;
-    margin:15px;
-    border-style: none;
-    border-radius: 5px;
-    background-color: skyblue;
-    color:white;
-    font-weight: bold;
-    opacity: 0.8;
+  width: 380px;
+  height: 40px;
+  margin: 15px;
+  border-style: none;
+  border-radius: 5px;
+  background-color: skyblue;
+  color: white;
+  font-weight: bold;
+  opacity: 0.8;
 }
 
 .loginBtnActive {
-    width:380px;
-    height:40px;
-    margin:15px;
-    border-style: none;
-    border-radius: 5px;
-    background-color: red;
-    color:white;
-    font-weight: bold;
-    opacity: 0.5;
+  width: 380px;
+  height: 40px;
+  margin: 15px;
+  border-style: none;
+  border-radius: 5px;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  opacity: 0.5;
 }
 
-a {
-    margin:50px;
-    margin-top:150px;
-    text-decoration: none;
-    font-size:13px;
+.forgotPw {
+  margin: 50px;
+  margin-top: 150px;
+  text-decoration: none;
+  font-size: 13px;
 }
 
 .loginForm {
-    text-align: center;
+  text-align: center;
 }
