@@ -261,6 +261,10 @@
               border: none;
               font-weight: bold;
               cursor: pointer;
+
+              .onShow {
+                display: none;
+              }
             }
           }
         }

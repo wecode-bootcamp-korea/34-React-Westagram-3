@@ -17,7 +17,6 @@ const LoginJiHyun = () => {
   const [idPlaceHolder, setIdPlaceHolder] = useState(
     '전화번호, 사용자 이름 또는 이메일'
   );
-
   const [pwPlaceHolder, setPwPlaceHolder] = useState('비밀번호 4자리 이상');
 
   // <1. id, password 입력값 받아오는 객체값 객체로 만듦>

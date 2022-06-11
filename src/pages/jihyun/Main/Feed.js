@@ -4,16 +4,39 @@
    feedImg: '/images/jihyun/boat.jpeg',
    feedText: '하와이로 간 서핑...',
  */
-import React from 'react';
+import React, { useRef } from 'react';
 import { useState, useEffect } from 'react';
 import Comments from './Comment';
 
 function Feed({ id, writerId, writerImg, feedImg, feedText }) {
-  const [commentList, setCommentList] = useState(['댓글썻당!!', '우이이잉']);
+  const inputRef = useRef();
+  const [commentTxt, setCommentTxt] = useState('');
+  const [commentList, setCommentList] = useState([
+    '댓글썻당!!',
+    '댓글 두번썻당!',
+  ]);
+
+  const onSubmit = e => {
+    e.preventDefault();
+    if (e.target.value === '') {
+      return;
+    }
+
+    setCommentList(prev => [...prev, commentTxt]);
+    setCommentTxt('');
+    inputRef.current.focus();
+  };
+
+  const onInput = e =>
+    setCommentTxt(() => {
+      if (e.target.value === '') {
+        return;
+      }
+      return e.target.value;
+    });
 
   return (
     <div className="feeds" key={id}>
-      {/* <!-- 2-1-1. 상단 게시자 이름 --> */}
       <header className="feedTop">
         <p>
           <img src={writerImg} alt="wecode" />
@@ -23,9 +46,7 @@ function Feed({ id, writerId, writerImg, feedImg, feedText }) {
           <i className="fas fa-ellipsis-h" />
         </p>
       </header>
-      {/* <!-- 2-1-2. 사진 --> */}
       <img src={feedImg} alt="giraffe" className="giraffe" />
-      {/* <!-- 2-1-3. 피드 하단 내용들 --> */}
       <div id="feedBottomContents">
         {/* <!-- 피드 하단 내용 - 아이콘들 --> */}
         <div className="imgIcons">
@@ -130,17 +151,30 @@ function Feed({ id, writerId, writerImg, feedImg, feedText }) {
           <span className="gray"> 더 보기</span>
         </p>
       </div>
-      {/* <!-- 댓글기능 --> */}
       <section>
         <ul id="comments">
-          {commentList.map((el, idx) => (
-            <Comments txt={el} id={idx} />
-          ))}
+          {commentList.map((el, idx) => {
+            let ms = `${new Date().getTime() + Math.random()}`;
+            return (
+              <Comments
+                key={ms}
+                txt={el}
+                userNum={idx}
+                id={ms}
+                modifier={setCommentList}
+              />
+            );
+          })}
         </ul>
       </section>
 
-      <form className="contentForm">
-        <input placeholder="댓글 달기..." />
+      <form className="contentForm" onSubmit={onSubmit}>
+        <input
+          placeholder="댓글 달기..."
+          value={commentTxt}
+          ref={inputRef}
+          onInput={onInput}
+        />
         <button type="submit" className="addBtn">
           게시
         </button>

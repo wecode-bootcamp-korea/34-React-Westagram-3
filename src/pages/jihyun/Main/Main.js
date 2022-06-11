@@ -12,7 +12,7 @@ const MainJiHyun = () => {
       writerId: 'jihyun',
       writerImg: './images/jihyun/floggy.jpeg',
       feedImg: '/images/jihyun/boat.jpeg',
-      feedText: '하와이로 서핑갔다~ 유후',
+      feedText: '하와이로 서핑갔다~ 유후...',
     },
     {
       id: 1,
