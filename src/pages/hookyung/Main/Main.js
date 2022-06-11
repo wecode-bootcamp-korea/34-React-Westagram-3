@@ -12,7 +12,6 @@ const MainHooKyung = () => {
   }
   // 댓글 추가
   const addItem = () => {
-    console.log(commentList);
     return setCommentList([
       ...commentList,
       { id: new Date().getTime(), txt: comment },
@@ -354,8 +353,10 @@ const MainHooKyung = () => {
 */
 
 function CommentList(props) {
-  // console.log(props);
   const commentDelete = () => {
+    // 코멘트 리스트를 수정하기 위해 props로 setCommentList 를 받아옴
+    // prev는 받아온 댓글 객체 하나하나 변수명처럼 자유롭게 써도 무방하다.
+    // prev를 filter함수로 수정한다. (전체 댓글 리스트와 유니크한 댓글을 비교하여 값이 같지 않은것만 반환한다.)
     props.setCommentList(prev => {
       return prev.filter(el => el.id !== props.commentList.id);
     });
