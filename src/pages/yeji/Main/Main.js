@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import CommentList from './CommentList';
 import './main.scss';
 
 const MainYeJi = () => {
@@ -31,15 +32,15 @@ const MainYeJi = () => {
   useEffect(handleCheange, [commentText]);
 
   return (
-    <div class="wrap">
-      <nav class="header">
-        <div class="inner">
-          <h1 class="logo">
+    <div className="wrap">
+      <nav className="header">
+        <div className="inner">
+          <h1 className="logo">
             <a href="/">Westagram</a>
           </h1>
-          <div class="top-search">
-            <input type="text" placeholder="검색어 입력" class="input" />
-            <button type="submit" class="btn">
+          <div className="top-search">
+            <input type="text" placeholder="검색어 입력" className="input" />
+            <button type="submit" className="btn">
               <svg
                 focusable="false"
                 xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +50,7 @@ const MainYeJi = () => {
               </svg>
             </button>
           </div>
-          <div class="util">
+          <div className="util">
             <ul>
               <li>
                 <a href="/">
@@ -79,62 +80,62 @@ const MainYeJi = () => {
           </div>
         </div>
       </nav>
-      <main class="main">
-        <div class="feeds-wrap">
-          <div class="story-wrap">
-            <div class="items">
-              <div class="item">
-                <div class="img">
+      <main className="main">
+        <div className="feeds-wrap">
+          <div className="story-wrap">
+            <div className="items">
+              <div className="item">
+                <div className="img">
                   <img src="/images/yeji/img1.jpg" alt="" />
                 </div>
-                <div class="name">all.about.seoul.trip</div>
+                <div className="name">all.about.seoul.trip</div>
               </div>
-              <div class="item">
-                <div class="img">
+              <div className="item">
+                <div className="img">
                   <img src="/images/yeji/img1.jpg" alt="" />
                 </div>
-                <div class="name">all.about.seoul.trip</div>
+                <div className="name">all.about.seoul.trip</div>
               </div>
-              <div class="item">
-                <div class="img">
+              <div className="item">
+                <div className="img">
                   <img src="/images/yeji/img1.jpg" alt="" />
                 </div>
-                <div class="name">all.about.seoul.trip</div>
+                <div className="name">all.about.seoul.trip</div>
               </div>
-              <div class="item">
-                <div class="img">
+              <div className="item">
+                <div className="img">
                   <img src="/images/yeji/img1.jpg" alt="" />
                 </div>
-                <div class="name">jeong9204</div>
+                <div className="name">jeong9204</div>
               </div>
-              <div class="item">
-                <div class="img">
+              <div className="item">
+                <div className="img">
                   <img src="/images/yeji/img1.jpg" alt="" />
                 </div>
-                <div class="name">jeong9204</div>
+                <div className="name">jeong9204</div>
               </div>
-              <div class="item">
-                <div class="img">
+              <div className="item">
+                <div className="img">
                   <img src="/images/yeji/img1.jpg" alt="" />
                 </div>
-                <div class="name">jeong9204</div>
+                <div className="name">jeong9204</div>
               </div>
             </div>
           </div>
-          <div class="feeds">
+          <div className="feeds">
             <article>
-              <div class="nickname">
-                <div class="in">
-                  <div class="pic">
+              <div className="nickname">
+                <div className="in">
+                  <div className="pic">
                     <img src="/images/yeji/img1.jpg" alt="" />
                   </div>
-                  <div class="txt">jeong9204</div>
+                  <div className="txt">jeong9204</div>
                 </div>
-                <div class="more">
+                <div className="more">
                   <a href="/">
                     <svg
                       aria-label="옵션 더 보기"
-                      class="_8-yf5 "
+                      className="_8-yf5 "
                       color="#262626"
                       fill="#262626"
                       height="24"
@@ -149,17 +150,17 @@ const MainYeJi = () => {
                   </a>
                 </div>
               </div>
-              <div class="photo">
+              <div className="photo">
                 <img src="/images/yeji/img2.jpg" alt="" />
               </div>
-              <div class="info">
-                <div class="icons">
+              <div className="info">
+                <div className="icons">
                   <ul>
                     <li>
                       <a href="/">
                         <svg
                           aria-label="좋아요"
-                          class="i-like "
+                          className="i-like "
                           color="#262626"
                           fill="#262626"
                           height="24"
@@ -175,7 +176,7 @@ const MainYeJi = () => {
                       <a href="/">
                         <svg
                           aria-label="댓글 달기"
-                          class="_8-yf5 "
+                          className="_8-yf5 "
                           color="#262626"
                           fill="#262626"
                           height="24"
@@ -187,8 +188,8 @@ const MainYeJi = () => {
                             d="M20.656 17.008a9.993 9.993 0 10-3.59 3.615L22 22z"
                             fill="none"
                             stroke="currentColor"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
                           />
                         </svg>
                       </a>
@@ -197,7 +198,7 @@ const MainYeJi = () => {
                       <a href="/">
                         <svg
                           aria-label="게시물 공유"
-                          class="_8-yf5 "
+                          className="_8-yf5 "
                           color="#262626"
                           fill="#262626"
                           height="24"
@@ -208,8 +209,8 @@ const MainYeJi = () => {
                           <line
                             fill="none"
                             stroke="currentColor"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
                             x1="22"
                             x2="9.218"
                             y1="3"
@@ -219,19 +220,19 @@ const MainYeJi = () => {
                             fill="none"
                             points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334"
                             stroke="currentColor"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
                           />
                         </svg>
                       </a>
                     </li>
                   </ul>
                 </div>
-                <div class="i-save">
+                <div className="i-save">
                   <a href="/">
                     <svg
                       aria-label="저장"
-                      class="_8-yf5 "
+                      className="_8-yf5 "
                       color="#262626"
                       fill="#262626"
                       height="24"
@@ -243,34 +244,34 @@ const MainYeJi = () => {
                         fill="none"
                         points="20 21 12 13.44 4 21 4 3 20 3 20 21"
                         stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                       />
                     </svg>
                   </a>
                 </div>
               </div>
-              <div class="like-txt">좋아요 4,374개</div>
-              <div class="cnt">
-                <a href="/" class="cnt-nick">
+              <div className="like-txt">좋아요 4,374개</div>
+              <div className="cnt">
+                <a href="/" className="cnt-nick">
                   all.about.seoul.trip
                 </a>
-                <span class="in-txt">내용이 들어갑니다.....</span>
-                <a href="/" class="more-txt">
+                <span className="in-txt">내용이 들어갑니다.....</span>
+                <a href="/" className="more-txt">
                   더 보기
                 </a>
               </div>
-              <div class="comment-more">
+              <div className="comment-more">
                 <a href="/">
                   댓글 <span>100</span>개 모두 보기
                 </a>
               </div>
-              <div class="comment-wrap">
-                <div class="comment-cnt">
+              <div className="comment-wrap">
+                <div className="comment-cnt">
                   <ul id="commentCntList">
                     <li>
-                      <a href="/" class="comm-nick">
+                      <a href="/" className="comm-nick">
                         all.about.seoul.trip
                       </a>
                       <span>
@@ -278,13 +279,13 @@ const MainYeJi = () => {
                         들어갑니다. 댓글내용이 들어갑니다. 댓글내용이
                         들어갑니다.
                       </span>
-                      <a class="i-cancel" href="/">
+                      <a className="i-cancel" href="/">
                         닫기
                       </a>
-                      <a href="/" class="i-heart">
+                      <a href="/" className="i-heart">
                         <svg
                           aria-label="좋아요"
-                          class="_8-yf5 "
+                          className="_8-yf5 "
                           color="#8e8e8e"
                           fill="#8e8e8e"
                           height="12"
@@ -296,19 +297,20 @@ const MainYeJi = () => {
                         </svg>
                       </a>
                     </li>
-                    {commentCntList.map(commentText => (
+                    <CommentList commentCntList={commentCntList} />
+                    {/* {commentCntList.map(commentText => (
                       <li key={commentCntList.i}>
-                        <a href="/" class="comm-nick">
+                        <a href="/" className="comm-nick">
                           jeong9204
                         </a>
                         <span>{commentText}</span>
-                        <a class="i-cancel" href="/">
+                        <a className="i-cancel" href="/">
                           닫기
                         </a>
-                        <a href="/" class="i-heart">
+                        <a href="/" className="i-heart">
                           <svg
                             aria-label="좋아요"
-                            class="_8-yf5 "
+                            className="_8-yf5 "
                             color="#8e8e8e"
                             fill="#8e8e8e"
                             height="12"
@@ -320,15 +322,15 @@ const MainYeJi = () => {
                           </svg>
                         </a>
                       </li>
-                    ))}
+                    ))} */}
                   </ul>
                 </div>
-                <div class="time">6분 전</div>
-                <div class="comment-input">
-                  <div class="comm-icon">
+                <div className="time">6분 전</div>
+                <div className="comment-input">
+                  <div className="comm-icon">
                     <svg
                       aria-label="이모티콘"
-                      class="_8-yf5 "
+                      className="_8-yf5 "
                       color="#262626"
                       fill="#262626"
                       height="24"
@@ -342,7 +344,7 @@ const MainYeJi = () => {
                   <form id="commentForm" onSubmit={handleSubmit}>
                     <input
                       type="text"
-                      class="comm-input"
+                      className="comm-input"
                       id="commentText"
                       placeholder="댓글달기..."
                       onChange={commentTextInput}
@@ -350,7 +352,7 @@ const MainYeJi = () => {
                     />
                     <button
                       style={{ color: commentBtn }}
-                      class="comm-btn"
+                      className="comm-btn"
                       type="submit"
                       disabled={btnDisabled}
                     >
@@ -362,93 +364,93 @@ const MainYeJi = () => {
             </article>
           </div>
         </div>
-        <div class="main-right">
-          <div class="user-info">
-            <div class="pic">
+        <div className="main-right">
+          <div className="user-info">
+            <div className="pic">
               <img src="/images/yeji/img1.jpg" alt="" />
             </div>
-            <div class="info">
-              <div class="user-id">
+            <div className="info">
+              <div className="user-id">
                 <a href="/" id="myName">
                   jeong9204
                 </a>
               </div>
               <span>정예지</span>
             </div>
-            <div class="more">
+            <div className="more">
               <a href="/">전환</a>
             </div>
           </div>
-          <div class="recommend-wrap">
-            <div class="title">회원님을 위한 추천</div>
+          <div className="recommend-wrap">
+            <div className="title">회원님을 위한 추천</div>
             <ul>
               <li>
-                <div class="img">
+                <div className="img">
                   <img src="/images/yeji/img1.jpg" alt="" />
                 </div>
-                <div class="txt">
-                  <div class="tt">all.about.seoul.trip</div>
+                <div className="txt">
+                  <div className="tt">all.about.seoul.trip</div>
                   <p>Instagram 신규 가입</p>
                 </div>
-                <div class="follow-bt">
+                <div className="follow-bt">
                   <a href="/">팔로우</a>
                 </div>
               </li>
               <li>
-                <div class="img">
+                <div className="img">
                   <img src="/images/yeji/img1.jpg" alt="" />
                 </div>
-                <div class="txt">
-                  <div class="tt">all.about.seoul.trip</div>
+                <div className="txt">
+                  <div className="tt">all.about.seoul.trip</div>
                   <p>Instagram 신규 가입</p>
                 </div>
-                <div class="follow-bt">
+                <div className="follow-bt">
                   <a href="/">팔로우</a>
                 </div>
               </li>
               <li>
-                <div class="img">
+                <div className="img">
                   <img src="/images/yeji/img1.jpg" alt="" />
                 </div>
-                <div class="txt">
-                  <div class="tt">all.about.seoul.trip</div>
+                <div className="txt">
+                  <div className="tt">all.about.seoul.trip</div>
                   <p>Instagram 신규 가입</p>
                 </div>
-                <div class="follow-bt">
+                <div className="follow-bt">
                   <a href="/">팔로우</a>
                 </div>
               </li>
               <li>
-                <div class="img">
+                <div className="img">
                   <img src="/images/yeji/img1.jpg" alt="" />
                 </div>
-                <div class="txt">
-                  <div class="tt">all.about.seoul.trip</div>
+                <div className="txt">
+                  <div className="tt">all.about.seoul.trip</div>
                   <p>Instagram 신규 가입</p>
                 </div>
-                <div class="follow-bt">
+                <div className="follow-bt">
                   <a href="/">팔로우</a>
                 </div>
               </li>
               <li>
-                <div class="img">
+                <div className="img">
                   <img src="/images/yeji/img1.jpg" alt="" />
                 </div>
-                <div class="txt">
-                  <div class="tt">all.about.seoul.trip</div>
+                <div className="txt">
+                  <div className="tt">all.about.seoul.trip</div>
                   <p>Instagram 신규 가입</p>
                 </div>
-                <div class="follow-bt">
+                <div className="follow-bt">
                   <a href="/">팔로우</a>
                 </div>
               </li>
             </ul>
-            <div class="more">
+            <div className="more">
               <a href="/">모두 보기</a>
             </div>
           </div>
-          <div class="addr-box">
-            <div class="quick-link">
+          <div className="addr-box">
+            <div className="quick-link">
               <ul>
                 <li>
                   <a href="/">소개</a>
