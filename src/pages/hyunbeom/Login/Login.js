@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
-import "./Login.scss";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import React, { useEffect } from 'react';
+import './login.scss';
+import '../styles/common.css';
+
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 function LoginBox(props) {
   return (
@@ -11,7 +13,7 @@ function LoginBox(props) {
       </header>
       <form
         className="loginForm"
-        onSubmit={(event) => {
+        onSubmit={event => {
           event.preventDefault();
           props.goToMain(props.loginId, props.passwordId);
         }}
@@ -20,7 +22,7 @@ function LoginBox(props) {
           type="text"
           className="loginFormId"
           placeholder="전화번호, 사용자 이름 또는 이메일"
-          onChange={(event) => {
+          onChange={event => {
             props.setLoginId(event.target.value);
           }}
         />
@@ -28,7 +30,7 @@ function LoginBox(props) {
           type="password"
           placeholder="비밀번호"
           className="loginFormPassword"
-          onChange={(event) => {
+          onChange={event => {
             props.setPasswordId(event.target.value);
           }}
         />
@@ -51,23 +53,23 @@ function LoginBox(props) {
 function Login() {
   const navigate = useNavigate();
   const goToMain = (id, password) => {
-    if (id.indexOf("@") >= 0 && password.length >= 5) {
-      navigate("/main");
+    if (id.indexOf('@') >= 0 && password.length >= 5) {
+      navigate('/main-hyunbeom');
     } else {
-      alert("아니야");
+      alert('아니야');
     }
   };
 
   const btnHandler = (id, password) => {
-    if (id.indexOf("@") >= 0 && password.length >= 5) {
+    if (id.indexOf('@') >= 0 && password.length >= 5) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
     }
   };
 
-  let [loginId, setLoginId] = useState("");
-  let [passwordId, setPasswordId] = useState("");
+  let [loginId, setLoginId] = useState('');
+  let [passwordId, setPasswordId] = useState('');
 
   let [isDisabled, setIsDisabled] = useState(true);
 

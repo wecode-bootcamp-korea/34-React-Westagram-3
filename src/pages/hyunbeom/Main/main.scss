@@ -65,7 +65,7 @@
   height: 100vh;
   display: flex;
   justify-content: center;
-  padding-top: 150px;
+  padding-top: 120px;
   .feeds {
     .feeds-article {
       width: 600px;
@@ -87,6 +87,7 @@
           border-radius: 20px;
           border: var(--main-border);
           margin-right: 10px;
+          object-fit: cover;
         }
         span {
           margin-right: 410px;
@@ -177,12 +178,21 @@
       align-items: center;
       margin-bottom: 10px;
     }
+
     .user-pic img {
       width: 50px;
       height: 50px;
       border-radius: 25px;
       margin-right: 10px;
+      background: url(https://img1.daumcdn.net/thumb/C428x428/?scode=mtistory2&fname=https%3A%2F%2Ftistory4.daumcdn.net%2Ftistory%2F4809359%2Fattach%2F1af7989e615749b0b3f522ea82e59ba8)
+          padding-box,
+        linear-gradient(90deg, #eaeaa7, #ffcdf3aa, #c1b0e6) border-box;
+      background-size: contain;
+      object-fit: cover;
+
+      border: 3px solid transparent;
     }
+
     .user-info {
       display: flex;
       flex-direction: column;
@@ -198,6 +208,8 @@
       width: 40px;
       height: 40px;
       border-radius: 20px;
+
+      object-fit: cover;
     }
     .main-right-story {
       display: flex;
@@ -218,10 +230,11 @@
       width: 30px;
       height: 30px;
       border-radius: 15px;
+      object-fit: cover;
     }
 
     .user-info-follow {
-      margin-left: 100px;
+      padding-left: 100px;
       color: #449cf4;
       font-weight: bolder;
     }
@@ -240,4 +253,129 @@
 
 .fa-solid {
   color: #ed4a56;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: -45px;
+  margin-top: 20px;
+  width: 300px;
+  height: 400px;
+  border: var(--main-border);
+  border-radius: 5px;
+  box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  overflow-y: scroll;
+
+  &:after,
+  &:before {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+
+    content: '';
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  &:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: #ffffff;
+    border-width: 10px;
+    margin-left: -10px;
+  }
+  &:before {
+    border-color: rgba(219, 219, 219, 0);
+    border-bottom-color: #dbdbdb;
+    border-width: 11px;
+    margin-left: -11px;
+  }
+
+  .main-right-user {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 10px 10px 0px 10px;
+    width: 250px;
+  }
+
+  .user-pic img {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    margin-right: 10px;
+    border: var(--main-border);
+
+    object-fit: cover;
+  }
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.menuBox {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: -10px;
+  top: 25px;
+  margin-top: 20px;
+  width: 250px;
+  height: 220px;
+  border: var(--main-border);
+  border-radius: 10px;
+  box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.15);
+  background-color: white;
+
+  &:after,
+  &:before {
+    bottom: 100%;
+    right: 12%;
+    border: solid transparent;
+
+    content: '';
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  &:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: #ffffff;
+    border-width: 10px;
+    margin-left: -10px;
+  }
+  &:before {
+    border-color: rgba(219, 219, 219, 0);
+    border-bottom-color: #dbdbdb;
+    border-width: 11px;
+    margin-left: -11px;
+  }
+  .menuBoxIcon {
+    display: flex;
+    align-items: center;
+    padding: 15px 15px 0px 15px;
+  }
+  .menuBoxIcon:nth-child(2) {
+    i {
+      margin-right: 22px;
+      margin-left: 3px;
+    }
+  }
+  .menuBoxLogout {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    margin-top: 10px;
+    height: 100%;
+    width: 100%;
+    border-top: var(--main-border);
+  }
 }
