@@ -6,6 +6,8 @@ const MainHooKyung = () => {
   const [commentList, setCommentList] = useState([{ id: 1, txt: '댓글' }]);
 
   const [userId, setUserID] = useState(0);
+  const [feedLike, setFeedLike] = useState(false);
+
   // 댓글 저장
   function addComment(e) {
     setComment(e.target.value);
@@ -16,6 +18,11 @@ const MainHooKyung = () => {
       ...commentList,
       { id: new Date().getTime(), txt: comment },
     ]);
+  };
+
+  // 좋아요추가
+  const feedLikeAdd = () => {
+    setFeedLike(!feedLike);
   };
 
   return (
@@ -59,18 +66,35 @@ const MainHooKyung = () => {
               </div>
               <div className="articleIcon">
                 <div className="iconLeft">
-                  <svg
-                    aria-label="좋아요"
-                    className="8Yf5"
-                    color="#262626"
-                    fill="#262626"
-                    height="24"
-                    role="img"
-                    viewBox="0 0 24 24"
-                    width="24"
-                  >
-                    <path d="M16.792 3.904A4.989 4.989 0 0121.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 014.708-5.218 4.21 4.21 0 013.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 013.679-1.938m0-2a6.04 6.04 0 00-4.797 2.127 6.052 6.052 0 00-4.787-2.127A6.985 6.985 0 00.5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 003.518 3.018 2 2 0 002.174 0 45.263 45.263 0 003.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 00-6.708-7.218z" />
-                  </svg>
+                  <div className="feedLike" onClick={feedLikeAdd}>
+                    {feedLike === false ? (
+                      <svg
+                        aria-label="좋아요"
+                        className="8Yf5"
+                        color="#262626"
+                        fill="#262626"
+                        height="24"
+                        role="img"
+                        viewBox="0 0 24 24"
+                        width="24"
+                      >
+                        <path d="M16.792 3.904A4.989 4.989 0 0121.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 014.708-5.218 4.21 4.21 0 013.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 013.679-1.938m0-2a6.04 6.04 0 00-4.797 2.127 6.052 6.052 0 00-4.787-2.127A6.985 6.985 0 00.5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 003.518 3.018 2 2 0 002.174 0 45.263 45.263 0 003.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 00-6.708-7.218z" />
+                      </svg>
+                    ) : (
+                      <svg
+                        aria-label="좋아요 취소"
+                        class="_ab6-"
+                        color="#ed4956"
+                        fill="#ed4956"
+                        height="24"
+                        role="img"
+                        viewBox="0 0 48 48"
+                        width="24"
+                      >
+                        <path d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z" />
+                      </svg>
+                    )}
+                  </div>
                   <svg
                     aria-label="댓글 달기"
                     className="8Yf5"
@@ -153,19 +177,7 @@ const MainHooKyung = () => {
                   </p>
                 </div>
                 <div className="comments">
-                  <div className="comment">
-                    <div className="commentView">
-                      <span className="commentUserId">camon_mj</span>
-                      <span className="commentContent">
-                         아아아 즐거운 위스타그램 🥲 위코드는 단순 교육업체가
-                        아닌 개발자 커뮤니티입니다.
-                      </span>
-                      <span className="commentLike">
-                        <i className="fa-regular fa-heart" />
-                      </span>
-                      <button className="commentDelete">x</button>
-                    </div>
-                  </div>
+                  <div className="comment" />
                   {/* 댓글 반복 map */}
                   {commentList.map((el, i) => {
                     return (
@@ -353,6 +365,7 @@ const MainHooKyung = () => {
 */
 
 function CommentList(props) {
+  const [addCommentLike, setAddCommentLike] = useState(false);
   const commentDelete = () => {
     // 코멘트 리스트를 수정하기 위해 props로 setCommentList 를 받아옴
     // prev는 받아온 댓글 객체 하나하나 변수명처럼 자유롭게 써도 무방하다.
@@ -362,13 +375,21 @@ function CommentList(props) {
     });
   };
 
+  const commentLike = () => {
+    setAddCommentLike(!addCommentLike);
+  };
+
   return (
     <div className="comment">
       <div className="commentView" key={props.commentList.id}>
-        <span className="commentUserId">sald__ssaed{props.userCount}</span>
+        <span className="commentUserId">sald__ssaed_{props.userCount}</span>
         <span className="commentContent"> {props.commentList.txt}</span>
-        <span className="commentLike">
-          <i className="fa-regular fa-heart" />
+        <span className="commentLike" onClick={commentLike}>
+          {addCommentLike === false ? (
+            <i class="fa-regular fa-heart" />
+          ) : (
+            <i class="fa-solid fa-heart" style={{ color: 'red' }} />
+          )}
         </span>
         <button className="commentDelete" onClick={commentDelete}>
           x

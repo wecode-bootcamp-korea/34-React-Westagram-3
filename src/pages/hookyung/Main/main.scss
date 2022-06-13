@@ -34,27 +34,27 @@
           margin-left: 10px;
           color: #2c2c2c;
         }
-        .searchBar {
-          position: relative;
-          background-color: #575757;
-          .searchBarInput {
-            width: 268px;
-            height: 36px;
-            background-color: #efefef;
-            border: none;
-            border-radius: 6px;
-            padding-left: 36px;
-          }
+      }
+      .searchBar {
+        position: relative;
 
-          .fa-magnifying-glass {
-            color: #808080;
-            position: absolute;
-            top: 10px;
-            right: 240px;
-          }
+        .searchBarInput {
+          width: 268px;
+          height: 36px;
+          background-color: #efefef;
+          border: none;
+          border-radius: 6px;
+          padding-left: 36px;
+          outline: none;
+        }
+
+        .fa-magnifying-glass {
+          color: #808080;
+          position: absolute;
+          top: 10px;
+          right: 240px;
         }
       }
-
       .headerNav {
         display: flex;
 
@@ -179,7 +179,7 @@
                   display: flex;
                   align-items: center;
                   position: relative;
-                  padding-bottom: 4px;
+                  padding-bottom: 8px;
 
                   .commentUserId {
                     font-weight: 900;
@@ -187,7 +187,7 @@
                   }
 
                   .commentLike {
-                    font-size: 16px;
+                    font-size: 14px;
                     align-self: flex-end;
                     cursor: pointer;
                     position: absolute;
