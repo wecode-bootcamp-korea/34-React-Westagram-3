@@ -1,24 +1,70 @@
 import React, { createElement, useState } from 'react';
 import './main.scss';
+import data from './UserData';
 
 const Main = () => {
-  const [comment, setCommentValue] = useState('');
+  const [comment, setComment] = useState('');
 
   //댓글 창 더하기
   const [array, setArray] = useState([]);
 
+  const [modal, setModal] = useState('close');
+
+  const [searchValue, setSearchValue] = useState([]);
+
+  // const searchMatch = e => {
+  //   console.log(e.target.value);
+  //   data.map((dataElement, index) => {
+  //       setSearchValue(dataElement.profileImg, ),
+  //       let userName = dataElement.userName,
+  //       let status = dataElement.userName
+  //   });
+  // };
+
+  const onClickSearch = () => {
+    {
+      modal === 'open' ? setModal('close') : setModal('open');
+    }
+  };
+
+  const SearchProfile = () => {
+    return (
+      <div className={modal === 'open' ? 'search' : 'searchHide'}>
+        <div className="profile_collect">
+          <img
+            src="https://cdne-totv8-prod.azureedge.net/media/40824/firstteam_heungminson_2021_22.png?anchor=center&mode=crop&quality=100&width=500"
+            alt="profile"
+            className="profile_normal"
+          />
+          <div className="profile_text">
+            <p className="profile_name">_yum_s</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const getComment = event => {
     event.preventDefault();
-    setCommentValue(event.target.value);
-    // console.log(comment);
+    setComment(event.target.value);
   };
 
   const summit = e => {
     e.preventDefault();
-    console.log('SUMMIT!!');
     setArray(enters => [...enters, comment]);
     e.target.reset();
-    console.log(array);
+  };
+
+  const clickLike = e => {
+    if (e.target.src === 'https://ifh.cc/g/L7KsFY.png') {
+      e.target.src = 'https://ifh.cc/g/b41PGW.png';
+    } else {
+      e.target.src = 'https://ifh.cc/g/L7KsFY.png';
+    }
+  };
+
+  const deleteComment = e => {
+    e.target.parentNode.parentNode.remove();
   };
 
   return (
@@ -36,7 +82,10 @@ const Main = () => {
           type="text"
           className="header_input"
           placeholder="&#128269; 검 색 "
+          onClick={onClickSearch}
+          //   onChange={searchMatch}
         ></input>
+        <SearchProfile></SearchProfile>
         <div className="header_logos">
           <img
             src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/explore.png"
@@ -129,11 +178,14 @@ const Main = () => {
                   더 보기
                 </a>
               </div>
-              <div className="comment_presonal">
-                {array.map((comment, index) => (
-                  <CommentAdd comment={comment} index={index} key={index} />
-                ))}
-              </div>
+              {array.map((comment, index) => (
+                <CommentAdd
+                  comment={comment}
+                  num={index}
+                  clickLike={clickLike}
+                  deleteComment={deleteComment}
+                />
+              ))}
             </div>
 
             <span className="comment_personal profile_desc">42분 전</span>
@@ -143,7 +195,6 @@ const Main = () => {
                 type="text"
                 placeholder="댓글 달기..."
                 className="comment_box"
-                // onKeyUp={'enterkey()'}
                 onChange={getComment}
               />
               <button className="upload_btn">게시</button>
@@ -274,9 +325,20 @@ const Main = () => {
 
 const CommentAdd = props => {
   return (
-    <div key={props.index}>
-      <span className="profile_name">wecode</span>
-      <span>{props.comment}</span>
+    <div className="comment_personal" id={props.num} key={props.num}>
+      <div key={props.num}>
+        <span className="profile_name_comment">iamaboyyouarea</span>
+        <span>{props.comment}</span>
+        <span className="del_comment" onClick={props.deleteComment}>
+          X
+        </span>
+      </div>
+      <img
+        src="https://ifh.cc/g/b41PGW.png"
+        alt="like"
+        className="comment_size"
+        onClick={props.clickLike}
+      ></img>
     </div>
   );
 };
