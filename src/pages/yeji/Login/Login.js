@@ -32,14 +32,14 @@ const LoginYeJi = () => {
   useEffect(handleCheange, [userID, userPW]);
 
   return (
-    <div class="login-wrap">
-      <div class="inner">
-        <div class="logo">
+    <div className="login-wrap">
+      <div className="inner">
+        <div className="logo">
           <Link to="/Main">Westagram</Link>
         </div>
-        <div class="form-box">
+        <div className="form-box">
           <form id="loginForm" onSubmit={handleSubmit}>
-            <div class="box">
+            <div className="box">
               <input
                 type="text"
                 id="userID"
@@ -47,7 +47,7 @@ const LoginYeJi = () => {
                 onChange={handleIdInput}
               />
             </div>
-            <div class="box">
+            <div className="box">
               <input
                 type="password"
                 id="userPW"
@@ -55,7 +55,7 @@ const LoginYeJi = () => {
                 onChange={handlePassInput}
               />
             </div>
-            <div class="login-btn">
+            <div className="login-btn">
               <button
                 style={{ backgroundColor: loginBtn }}
                 id="loginBtn"
@@ -67,7 +67,7 @@ const LoginYeJi = () => {
             </div>
           </form>
         </div>
-        <div class="find-pw">
+        <div className="find-pw">
           <a href="/">비밀번호를 잊으셨나요?</a>
         </div>
       </div>
