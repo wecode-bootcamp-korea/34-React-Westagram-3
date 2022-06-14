@@ -144,10 +144,100 @@ function User(props) {
   );
 }
 
-function Main() {
-  let [chatInput, setChatInput] = useState('');
-  let [chat, setChat] = useState(['이야~~~ 잘 만들었네!']);
+function Feeds(props) {
   let [red, setRed] = useState('');
+  let [chat, setChat] = useState([]);
+  let [chatInput, setChatInput] = useState('');
+  return (
+    <>
+      <article className="feeds-article" key={props.i}>
+        <div className="feeds-user-name">
+          <img src={props.userInfo.pic} />
+          <span className="bold">{props.userInfo.title}</span>
+          <i className="fa fa-ellipsis"></i>
+        </div>
+        <div className="feeds-pic">
+          <img src={props.userInfo.feedPic} />
+        </div>
+        <section className="feeds-like">
+          <div className="feeds-like__icon">
+            <div className="feeds-like__icon-left">
+              <i
+                onClick={() => {
+                  red === 'fa-solid' ? setRed('') : setRed('fa-solid');
+                }}
+                className={`fa-regular fa-lg fa-heart big-heart + ${red}`}
+              ></i>
+              <i className="fa-regular fa-lg fa-flip-horizontal fa-comment"></i>
+              <i className="fa fa-lg fa-arrow-up-from-bracket"></i>
+            </div>
+            <div className="feeds-like__icon-right">
+              <i className="fa-regular fa-lg fa-bookmark"></i>
+            </div>
+          </div>
+          <div className="feeds-like__config">
+            <div className="feeds-like__config-pic"></div>
+            <span>
+              <span className="bold">{props.userInfo.firstLikeUser}</span>님
+              <span className="bold">외 {props.userInfo.likeCount}명</span>이
+              좋아합니다
+            </span>
+          </div>
+          <div className="feeds-like__chat-screen">
+            <div className="feeds-like__chat-mine">
+              <span className="bold">{props.userInfo.title}</span>
+              <span>{props.userInfo.feedContent}</span>
+              <span className="gray">더 보기</span>
+            </div>
+            <div className="feeds-like__chat-friends">
+              <div className="feeds-like__chat-friends-left">
+                <span className="bold">{props.userInfo.feedFirstUser}</span>
+                <span>{props.userInfo.feedFirstChat}</span>
+              </div>
+            </div>
+            {chat.map((a, i) => {
+              let chats = a;
+
+              return (
+                <Chat
+                  chatInput={chatInput}
+                  chat={chat}
+                  setChat={setChat}
+                  chats={chats}
+                  i={i}
+                />
+              );
+            })}
+          </div>
+        </section>
+        <span className="chating-time gray">42분 전</span>
+        <form
+          className="feeds-chating"
+          onSubmit={event => {
+            event.preventDefault();
+            let copy = [...chat];
+            copy.push(chatInput);
+            setChat(copy);
+            event.target.reset();
+            setChatInput('');
+          }}
+        >
+          <input
+            className="feeds-chating-input"
+            type="text"
+            placeholder="댓글 달기..."
+            onChange={event => {
+              setChatInput(event.target.value);
+            }}
+          />
+          <button>게시</button>
+        </form>
+      </article>
+    </>
+  );
+}
+
+function Main() {
   let [userInfo, setUserInfo] = useState(data);
   let [modalBox, setModalBox] = useState(false);
   let [menuBox, setMenuBox] = useState(false);
@@ -169,83 +259,13 @@ function Main() {
         }}
       >
         <div className="feeds">
-          <article className="feeds-article">
-            <div className="feeds-user-name">
-              <img src="/images/hyunbeom/myPhoto.jpeg" />
-              <span className="bold">hyunbeom__hi</span>
-              <i className="fa fa-ellipsis"></i>
-            </div>
-            <div className="feeds-pic">
-              <img src="/images/hyunbeom/feed.jpeg" />
-            </div>
-            <section className="feeds-like">
-              <div className="feeds-like__icon">
-                <div className="feeds-like__icon-left">
-                  <i
-                    onClick={() => {
-                      red === 'fa-solid' ? setRed('') : setRed('fa-solid');
-                    }}
-                    className={`fa-regular fa-lg fa-heart big-heart + ${red}`}
-                  ></i>
-                  <i className="fa-regular fa-lg fa-flip-horizontal fa-comment"></i>
-                  <i className="fa fa-lg fa-arrow-up-from-bracket"></i>
-                </div>
-                <div className="feeds-like__icon-right">
-                  <i className="fa-regular fa-lg fa-bookmark"></i>
-                </div>
-              </div>
-              <div className="feeds-like__config">
-                <div className="feeds-like__config-pic"></div>
-                <span>
-                  <span className="bold">aineworld</span>님
-                  <span className="bold">외 10명</span>이 좋아합니다
-                </span>
-              </div>
-              <div className="feeds-like__chat-screen">
-                <div className="feeds-like__chat-mine">
-                  <span className="bold">canon_mj</span>
-                  <span>위워크에서 진행한 도자기 클래스...</span>
-                  <span className="gray">더 보기</span>
-                </div>
-                {chat.map((a, i) => {
-                  let chats = a;
-
-                  return (
-                    <Chat
-                      chatInput={chatInput}
-                      chat={chat}
-                      setChat={setChat}
-                      chats={chats}
-                      i={i}
-                    />
-                  );
-                })}
-              </div>
-            </section>
-            <span className="chating-time gray">42분 전</span>
-            <form
-              className="feeds-chating"
-              onSubmit={event => {
-                event.preventDefault();
-                let copy = [...chat];
-                copy.push(chatInput);
-                setChat(copy);
-                event.target.reset();
-                setChatInput('');
-              }}
-            >
-              <input
-                className="feeds-chating-input"
-                type="text"
-                placeholder="댓글 달기..."
-                onChange={event => {
-                  setChatInput(event.target.value);
-                }}
-              />
-              <button>게시</button>
-            </form>
-          </article>
+          {userInfo.map((a, i) => {
+            if (a.isLocationFeeds) {
+              return <Feeds userInfo={userInfo[i]} />;
+            }
+          })}
         </div>
+
         <div className="right">
           <div className="main-right">
             <div className="main-right-user">
@@ -257,7 +277,7 @@ function Main() {
                 <span>모두보기</span>
               </header>
               {userInfo.map((a, i) => {
-                if (a.location === 'Story') {
+                if (a.isLocationStory) {
                   return (
                     <div className="main-right-user">
                       <User userInfo={userInfo[i]} />
@@ -271,7 +291,6 @@ function Main() {
                 <span className="gray">회원님을 위한 추천</span>
                 <span>모두보기</span>
               </header>
-
               <div className="main-right-user">
                 <User userInfo={userInfo[6]} />
                 <div className="user-info-follow">
@@ -307,24 +326,3 @@ function Main() {
 }
 
 export default Main;
-
-{
-  /* <div className="main-right-user">
-<User userInfo={userInfo[6]} />
-<div className="user-info-follow">
-  <span>팔로우</span>
-</div>
-</div>
-<div className="main-right-user">
-<User userInfo={userInfo[6]} />
-<div className="user-info-follow">
-  <span>팔로우</span>
-</div>
-</div>
-<div className="main-right-user">
-<User userInfo={userInfo[7]} />
-<div className="user-info-follow">
-  <span>팔로우</span>
-</div>
-</div> */
-}

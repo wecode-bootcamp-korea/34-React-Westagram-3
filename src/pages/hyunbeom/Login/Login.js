@@ -57,7 +57,7 @@ function Login() {
     if (id.indexOf('@') >= 0 && password.length >= 5) {
       navigate('/main-hyunbeom');
     } else {
-      alert('아니야');
+      alert('올바르게 입력하세요');
     }
   };
 
