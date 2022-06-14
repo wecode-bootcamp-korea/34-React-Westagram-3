@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
-import './login.scss';
+import '../styles/reset.css';
 import '../styles/common.css';
+import './login.scss';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 function LoginBox(props) {
   return (
-    <article className="loginBox ">
+    <article className="loginBox">
       <header className="loginHeader">
         <h1 className="loginHeaderLogo logo">Westagram</h1>
       </header>
@@ -70,7 +71,6 @@ function Login() {
 
   let [loginId, setLoginId] = useState('');
   let [passwordId, setPasswordId] = useState('');
-
   let [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {

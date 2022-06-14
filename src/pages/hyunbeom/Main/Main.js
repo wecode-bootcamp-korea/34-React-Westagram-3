@@ -1,6 +1,6 @@
 import React from 'react';
 import './main.scss';
-// import Nav from '../Nav/Nav';
+import '../styles/reset.css';
 import '../styles/common.css';
 import { useState } from 'react';
 import data from './data';
@@ -256,24 +256,22 @@ function Main() {
                 <span className="gray">스토리</span>
                 <span>모두보기</span>
               </header>
-              <div className="main-right-user">
-                <User userInfo={userInfo[1]} />
-              </div>
-              <div className="main-right-user">
-                <User userInfo={userInfo[2]} />
-              </div>
-              <div className="main-right-user">
-                <User userInfo={userInfo[3]} />
-              </div>
-              <div className="main-right-user">
-                <User userInfo={userInfo[4]} />
-              </div>
+              {userInfo.map((a, i) => {
+                if (a.location === 'Story') {
+                  return (
+                    <div className="main-right-user">
+                      <User userInfo={userInfo[i]} />
+                    </div>
+                  );
+                }
+              })}
             </div>
             <div className="main-right-story recommend">
               <header className="main-right-story__header">
                 <span className="gray">회원님을 위한 추천</span>
                 <span>모두보기</span>
               </header>
+
               <div className="main-right-user">
                 <User userInfo={userInfo[6]} />
                 <div className="user-info-follow">
@@ -309,3 +307,24 @@ function Main() {
 }
 
 export default Main;
+
+{
+  /* <div className="main-right-user">
+<User userInfo={userInfo[6]} />
+<div className="user-info-follow">
+  <span>팔로우</span>
+</div>
+</div>
+<div className="main-right-user">
+<User userInfo={userInfo[6]} />
+<div className="user-info-follow">
+  <span>팔로우</span>
+</div>
+</div>
+<div className="main-right-user">
+<User userInfo={userInfo[7]} />
+<div className="user-info-follow">
+  <span>팔로우</span>
+</div>
+</div> */
+}
