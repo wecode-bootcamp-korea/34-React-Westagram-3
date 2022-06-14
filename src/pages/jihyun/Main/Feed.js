@@ -1,19 +1,13 @@
-/**
-   writerId: 'jihyun',
-   writerImg: './images/jihyun/floggy.jpeg',
-   feedImg: '/images/jihyun/boat.jpeg',
-   feedText: '하와이로 간 서핑...',
- */
 import React, { useRef } from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Comments from './Comment';
 
 function Feed({ id, writerId, writerImg, feedImg, feedText }) {
   const inputRef = useRef();
-  const [commentTxt, setCommentTxt] = useState('');
+  const [commentTxt, setCommentTxt] = useState(''); // [리팩토링] - e.target.value로 바로 활용???? (미해결-할 수 있는 접근인지?)
   const [commentList, setCommentList] = useState([
-    '댓글썻당!!',
-    '댓글 두번썻당!',
+    { id: new Date().getTime() + Math.random(), txt: '댓글썻당!!' },
+    { id: new Date().getTime() + Math.random(), txt: '댓글 두번썻당!' },
   ]);
 
   const onSubmit = e => {
@@ -22,7 +16,10 @@ function Feed({ id, writerId, writerImg, feedImg, feedText }) {
       return;
     }
 
-    setCommentList(prev => [...prev, commentTxt]);
+    setCommentList(prev => [
+      ...prev,
+      { id: new Date().getTime() + Math.random(), txt: commentTxt },
+    ]);
     setCommentTxt('');
     inputRef.current.focus();
   };
@@ -154,14 +151,13 @@ function Feed({ id, writerId, writerImg, feedImg, feedText }) {
       <section>
         <ul id="comments">
           {commentList.map((el, idx) => {
-            let ms = `${new Date().getTime() + Math.random()}`;
             return (
               <Comments
-                key={ms}
-                txt={el}
+                key={el.id}
+                txt={el.txt}
                 userNum={idx}
-                id={ms}
-                modifier={setCommentList}
+                idNum={el.id}
+                setCommentList={setCommentList}
               />
             );
           })}

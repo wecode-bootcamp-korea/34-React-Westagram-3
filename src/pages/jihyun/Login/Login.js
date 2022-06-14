@@ -3,50 +3,32 @@ import './login.scss';
 import '../../../styles/reset.scss';
 import '../../../styles/common.scss';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const LoginJiHyun = () => {
-  // < 폼 submit시 메인창 연결 >
   const navigate = useNavigate(); // navigate1
-
   const [loginInfo, setLoginInfo] = useState({ name: '', password: '' });
-  const [btnColor, setBtnColor] = useState('');
-  const [btnAble, setBtnAble] = useState(true);
-  const [idBolder, setIdBolder] = useState('vaild');
-  const [pwBolder, setPwBolder] = useState('vaild');
+  const [idBolder, setIdBolder] = useState('valid'); // [질문]state를 없앨 순 없을지?
+  const [pwBolder, setPwBolder] = useState('valid'); // [질문]state를 없앨 순 없을지?
   const [idPlaceHolder, setIdPlaceHolder] = useState(
     '전화번호, 사용자 이름 또는 이메일'
-  );
-  const [pwPlaceHolder, setPwPlaceHolder] = useState('비밀번호 4자리 이상');
+  ); // [질문]state를 없앨 순 없을지?
+  const [pwPlaceHolder, setPwPlaceHolder] = useState('비밀번호 4자리 이상'); // [질문]state를 없앨 순 없을지?
 
-  // <1. id, password 입력값 받아오는 객체값 객체로 만듦>
-  const onChangeInput = e => {
+  const onInput = e => {
+    // <1. id, password 입력값 받아오는 객체값 객체로 만듦>
     setLoginInfo(prev => {
       return { ...prev, [e.target.name]: e.target.value };
     });
-  };
-
-  useEffect(() => {
     // <2. 로그인 인풋 보더 > - 처음과 값 있을시 valid (유효성 미통과시 red로 되기때문에 다시 돌려주기 위해)
+    // 임시 주석처리 (red로 됐다가, 글자 하나라도 입력시 다시 회색으로)
     if (loginInfo.name !== '') {
-      setIdBolder('vaild');
+      setIdBolder('valid');
     }
-
     if (loginInfo.password !== '') {
-      setPwBolder('vaild');
+      setPwBolder('valid');
     }
-
-    // <3.  버튼 활성화 여부 판단 > - id,pw 값이 둘다 하나라도 있으면 버튼 색깔 바꿈
-    // [질문1] - input값이 하나 써질때마다 계속 실행될텐데 더 좋은 방법 없을지??
-    if (loginInfo.name !== '' && loginInfo.password !== '') {
-      setBtnColor('fullBtn');
-      setBtnAble(false);
-    }
-    if (loginInfo.name === '' || loginInfo.password === '') {
-      setBtnColor('emptyBtn');
-      setBtnAble(true);
-    }
-  }, [loginInfo]);
+  };
 
   // 3.Submit시 id, pw 유효성 검사
   const onSubmit = e => {
@@ -56,21 +38,21 @@ const LoginJiHyun = () => {
       return;
     }
 
-    // 아이디 유효성
+    // 아이디 유효성 미통과시 - placehoder 경고 ,bolder 레드로
     if (loginInfo.name.length < 4 || !loginInfo.name.includes('@')) {
       setLoginInfo(prev => ({ ...prev, name: '' }));
       setIdPlaceHolder('@를 포함한, 4자리 이상!');
-      setIdBolder('unvaild');
+      setIdBolder('unvalid');
     }
 
-    // 비번 유효성
+    // 비번 유효성 미통과시 - placehoder 경고 ,bolder 레드로
     if (loginInfo.password.length < 4) {
       setLoginInfo(prev => ({ ...prev, password: '' }));
       setPwPlaceHolder('4자리 이상!');
-      setPwBolder('unvaild');
+      setPwBolder('unvalid');
     }
 
-    // 유효성 통과시 submit 후, main으로 이동하기
+    // 유효성 통과시 - submit 후, main으로 이동하기
     if (
       loginInfo.name.length >= 4 &&
       loginInfo.name.includes('@') &&
@@ -92,7 +74,7 @@ const LoginJiHyun = () => {
             className={idBolder}
             name="name"
             value={loginInfo.name}
-            onChange={onChangeInput}
+            onInput={onInput}
           />
           <input
             type="password"
@@ -100,9 +82,19 @@ const LoginJiHyun = () => {
             className={pwBolder}
             name="password"
             value={loginInfo.password}
-            onChange={onChangeInput}
+            onInput={onInput}
           />
-          <button type="submit" disabled={btnAble} className={btnColor}>
+          <button
+            type="submit"
+            disabled={
+              loginInfo.name !== '' && loginInfo.password !== '' ? false : true
+            }
+            className={
+              loginInfo.name !== '' && loginInfo.password !== ''
+                ? 'fullBtn'
+                : 'emptyBtn'
+            }
+          >
             로그인
           </button>
         </form>
@@ -114,3 +106,7 @@ const LoginJiHyun = () => {
 };
 
 export default LoginJiHyun;
+
+// [리팩트링1 - state는 loginInfo만 남겨놓기] (일부만 해결ㅇ)
+// state를 많이 쓰게되면, 개발하다 헷갈리게 되서 잘못 될 수도 있음. 따라서 state를 최소화 하는게 좋음
+// 지금 대부분의 state는 loginInfo의 상태에 따라 변동되고 있음. 따라서 loginInfo를 이용하고, 그 외 state는 없애는게 나음
