@@ -12,7 +12,7 @@ const LoginJiHyun = () => {
     idBolder: 'valid',
     pwBolder: 'valid',
   });
-  const [placehoderValue, setPlacehoderValue] = useState({
+  const [placeholderValue, setPlaceholderValue] = useState({
     idPlaceHolder: '전화번호, 사용자 이름 또는 이메일',
     pwPlaceHolder: '비밀번호 6자리 이상',
   });
@@ -40,21 +40,21 @@ const LoginJiHyun = () => {
       return;
     }
 
-    // 4. 아이디 유효성 미통과시 - placehoder 경고 ,bolder 레드로
+    // 4. 아이디 유효성 미통과시 - placeholder 경고 ,bolder 레드로
     if (loginInfo.name.length < 6 || !loginInfo.name.includes('@')) {
       setLoginInfo(prev => ({ ...prev, name: '' }));
       setBolderValue(prev => ({ ...prev, idBolder: 'unvalid' }));
-      setPlacehoderValue(prev => ({
+      setPlaceholderValue(prev => ({
         ...prev,
         idPlaceHolder: '@를 포함한, 6자리 이상!',
       }));
     }
 
-    // 4. 비번 유효성 미통과시 - placehoder 경고 ,bolder 레드로
+    // 4. 비번 유효성 미통과시 - placeholder 경고 ,bolder 레드로
     if (loginInfo.password.length < 6) {
       setLoginInfo(prev => ({ ...prev, password: '' }));
       setBolderValue(prev => ({ ...prev, pwBolder: 'unvalid' }));
-      setPlacehoderValue(prev => ({
+      setPlaceholderValue(prev => ({
         ...prev,
         pwPlaceHolder: '6자리 이상!',
       }));
@@ -78,7 +78,7 @@ const LoginJiHyun = () => {
         <form id="loginForm" onSubmit={onSubmit}>
           <input
             type="text"
-            placeholder={placehoderValue.idPlaceHolder}
+            placeholder={placeholderValue.idPlaceHolder}
             className={bolderValue.idBolder}
             name="name"
             value={loginInfo.name}
@@ -86,7 +86,7 @@ const LoginJiHyun = () => {
           />
           <input
             type="password"
-            placeholder={placehoderValue.pwPlaceHolder}
+            placeholder={placeholderValue.pwPlaceHolder}
             className={bolderValue.pwBolder}
             name="password"
             value={loginInfo.password}
