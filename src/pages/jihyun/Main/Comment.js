@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-// (해결ㅇ) [리팩토링] = modifier변수명 바꾸기
 function Comments({ txt, userNum, idNum, setCommentList }) {
   const [isHeart, setIsHeart] = useState(false);
 
@@ -20,7 +19,6 @@ function Comments({ txt, userNum, idNum, setCommentList }) {
     setCommentList(prev => prev.filter(el => el.id !== idNum));
   };
 
-  // (해결ㅇ) [리팩토링] - key는 배열을 렌더링 할 때씀, return 안의 요소에서는 쓸 필요 없음 (해결ㅇ-key를 쓰는 곳 잘 모르겠음)
   return (
     <li>
       <p>
@@ -28,7 +26,6 @@ function Comments({ txt, userNum, idNum, setCommentList }) {
       </p>
       <span>
         <button type="button" value={isHeart} onClick={heartClick}>
-          {/* (해결ㅇ) [리팩토링]- 하트 빨간-하양 왔다갔다 하는거 : 클래스명으로 주지말고, isheart가 true false인지 따져서 삼항연산자로 쓰기 */}
           {isHeart ? (
             <svg
               className={isHeart ? null : 'onShow'}

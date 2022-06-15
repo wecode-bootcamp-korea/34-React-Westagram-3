@@ -4,7 +4,7 @@ import Comments from './Comment';
 
 function Feed({ id, writerId, writerImg, feedImg, feedText }) {
   const inputRef = useRef();
-  const [commentTxt, setCommentTxt] = useState(''); // [리팩토링] - e.target.value로 바로 활용???? (미해결-할 수 있는 접근인지?)
+  const [commentTxt, setCommentTxt] = useState('');
   const [commentList, setCommentList] = useState([
     { id: new Date().getTime() + Math.random(), txt: '댓글썻당!!' },
     { id: new Date().getTime() + Math.random(), txt: '댓글 두번썻당!' },
@@ -33,7 +33,7 @@ function Feed({ id, writerId, writerImg, feedImg, feedText }) {
     });
 
   return (
-    <div className="feeds" key={id}>
+    <div className="feeds">
       <header className="feedTop">
         <p>
           <img src={writerImg} alt="wecode" />

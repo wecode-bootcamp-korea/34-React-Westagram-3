@@ -1,41 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
+import names from '../datas/names';
 import './main.scss';
 import '../../../styles/reset.scss';
 import '../../../styles/common.scss';
 import Feed from './Feed';
-
-const names = [
-  { name: 'Alice', korean: '앨리스' },
-  { name: 'Abel', korean: '아벨' },
-  { name: 'Adia', korean: '애디아' },
-  { name: 'Alexandra', korean: '알렉산드라' },
-  { name: 'Amber', korean: '엠버' },
-  { name: 'Alexandra', korean: '알렉산드라' },
-  { name: 'Amber', korean: '엠버' },
-  { name: 'Baby', korean: '베이비' },
-  { name: 'Benny', korean: '베니' },
-  { name: 'Brooke', korean: '브루크' },
-  { name: 'Bety', korean: '베티' },
-  { name: 'Bency', korean: '벤씨' },
-  { name: 'Bety', korean: '베티' },
-  { name: 'Bency', korean: '벤씨' },
-  { name: 'Callie', korean: '캘리' },
-  { name: 'Camille', korean: '카밀' },
-  { name: 'Caitlin', korean: '캐이틀린' },
-  { name: 'Caroline', korean: '캐롤린' },
-  { name: 'Charlotte', korean: '샬롯' },
-  { name: 'Caitlin', korean: '캐이틀린' },
-  { name: 'Caroline', korean: '캐롤린' },
-  { name: 'Charlotte', korean: '샬롯' },
-  { name: 'Danielle', korean: '대니엘' },
-  { name: 'Dua Lipa', korean: '두아 리파' },
-  { name: 'Della', korean: '델라' },
-  { name: 'Dora', korean: '도라' },
-  { name: 'Dorothy', korean: '도로시' },
-  { name: 'Dora', korean: '도라' },
-  { name: 'Dorothy', korean: '도로시' },
-];
 
 const MainJiHyun = () => {
   const [feedsDATA] = useState([
@@ -58,14 +27,8 @@ const MainJiHyun = () => {
   const [menuIsShow, setmenuIsShow] = useState(false);
   const [searchList, setSearchList] = useState(names);
 
-  // [질문] - 왜 한박자 늦게 실행되는지? <- C를 쓰고 지워야 리렌더링 됨.
-  // 1. setState 콜백함수(modifier)는 비동기로 호출되는 함수임.
-  // 2.만일 setState 콜백함수가 두번 실행이 된다면, 두 함수의 비동기 실행이 코드의 흐름대로 순서가 보장되지 않음
-  // 따라서 위에 setState 콜백함수를 실행하여 state를 바꾸고, 이 state를 이용하여 두번째 setState 콜백함수를 실행한다면 오류 날 수도 있음.
-
   const onInput = e => {
     const searchValue = e.target.value;
-    // setInputValue(prev => (prev = e.target.value));
     setSearchList(prev => {
       if (searchValue === '') {
         return [...names];
@@ -166,7 +129,6 @@ const MainJiHyun = () => {
         <div id="feedWrapper">
           {/* <!-- 2-1.왼쪽 게시글피드 --> */}
           {feedsDATA.map(el => (
-            // [리팩토링] - jsx에서 배열을 렌터링 할 땐, key를 prop으로 항상 넣어줘야 함! (해결ㅇ-key를 쓰는 곳 잘 모르겠음)
             <Feed
               key={el.id}
               id={el.id}
