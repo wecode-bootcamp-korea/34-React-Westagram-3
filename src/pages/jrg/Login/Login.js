@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import './login.scss';
 import { useState } from 'react';
 
@@ -11,6 +11,20 @@ const Login = () => {
     if (idValue.indexOf('@') !== -1 && pwValue.length > 5) {
       navigate('/main-jrg');
     }
+
+    fetch('http://10.58.7.17:8000/users/signin', {
+      method: 'post',
+      body: JSON.stringify({
+        email: idValue,
+        password: pwValue,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === 'SUCCESS') {
+          localStorage.setItem('token', res.access_token);
+        }
+      });
   };
 
   const [idValue, setIdValue] = useState('');
@@ -26,7 +40,6 @@ const Login = () => {
     } else {
       setClassSetting(false);
     }
-    console.log(classSetting);
   };
 
   const getPw = event => {
@@ -37,7 +50,25 @@ const Login = () => {
     } else {
       setClassSetting(false);
     }
-    console.log(classSetting);
+  };
+
+  const signUp = e => {
+    e.preventDefault();
+    console.log(idValue, pwValue);
+    fetch('http://10.58.7.17:8000/users/signup', {
+      method: 'post',
+      body: JSON.stringify({
+        email: idValue,
+        password: pwValue,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.success) {
+          alert('저장 완료');
+        }
+      });
+    e.target.reset();
   };
 
   return (
@@ -66,6 +97,10 @@ const Login = () => {
               로그인
             </button>
           </form>
+          <form onSubmit={signUp}>
+            <button className="loginBtnActive">회원가입</button>
+          </form>
+
           <a className="forgotPw" href="">
             비밀번호를 잊으셨나요?
           </a>

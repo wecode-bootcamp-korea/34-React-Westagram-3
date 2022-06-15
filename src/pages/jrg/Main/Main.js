@@ -1,4 +1,4 @@
-import React, { createElement, useState } from 'react';
+import React, { createElement, useState, useEffect } from 'react';
 import './main.scss';
 import data from './UserData';
 
@@ -10,7 +10,8 @@ const Main = () => {
 
   const [modal, setModal] = useState('close');
 
-  const [searchValue, setSearchValue] = useState([]);
+  //   const [searchValue, setSearchValue] = useState([]);
+  const [dataList, setDataList] = useState([]);
 
   // const searchMatch = e => {
   //   console.log(e.target.value);
@@ -20,6 +21,14 @@ const Main = () => {
   //       let status = dataElement.userName
   //   });
   // };
+
+  useEffect(() => {
+    fetch(`/data/datalist.json`)
+      .then(res => res.json())
+      .then(res => {
+        setDataList(res);
+      });
+  }, []);
 
   const onClickSearch = () => {
     {
@@ -106,7 +115,21 @@ const Main = () => {
       </header>
       <section className="section">
         <div className="left_div">
-          <article>
+          {dataList.map((a, i) => (
+            <FeedAdd
+              key={i}
+              profileName={a.userName}
+              profileImage={a.profileImg}
+              commentValue={a.commentValue}
+              feedImg={a.feedImg}
+              getComment={getComment}
+              summit={summit}
+              deleteComment={deleteComment}
+              clickLike={clickLike}
+              array={array}
+            />
+          ))}
+          {/* <article>
             <div className="profile_head">
               <div className="profile_collect">
                 <img
@@ -199,7 +222,7 @@ const Main = () => {
               />
               <button className="upload_btn">게시</button>
             </form>
-          </article>
+          </article> */}
         </div>
 
         <div className="right_div">
@@ -339,6 +362,103 @@ const CommentAdd = props => {
         className="comment_size"
         onClick={props.clickLike}
       ></img>
+    </div>
+  );
+};
+
+const FeedAdd = props => {
+  return (
+    <div className="article_div">
+      <article className="article">
+        <div className="profile_head">
+          <div className="profile_collect">
+            <img
+              src={props.profileImage}
+              alt="profile"
+              className="profile_normal"
+            />
+            <div className="profile_text">
+              <p className="profile_name">{props.profileName}</p>
+            </div>
+          </div>
+          <div className="logo_feed_right">
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/512/512142.png"
+              alt="logo_more"
+              className="logo_feed"
+            />
+          </div>
+        </div>
+        <div className="img_box">
+          <img src={props.feedImg} alt="feed" className="feed_image" />
+        </div>
+        <div className="feed_bar">
+          <div className="logo_feed_left">
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/833/833472.png"
+              alt="like"
+              className="logo_feed"
+            />
+            <img
+              src="https://ifh.cc/g/Z7NpAO.png"
+              alt="comment"
+              className="logo_feed"
+            />
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/3580/3580382.png"
+              alt="share"
+              className="logo_feed"
+            />
+          </div>
+          <div className="logo_feed_right">
+            <img
+              src="https://ifh.cc/g/M7Hcft.png"
+              alt="tag"
+              className="logo_feed"
+            />
+          </div>
+        </div>
+        <div className="profile_like">
+          <img
+            src="https://cdne-totv8-prod.azureedge.net/media/40824/firstteam_heungminson_2021_22.png?anchor=center&mode=crop&quality=100&width=500"
+            alt="profile"
+            className="profile_small"
+          />
+          <div className="profile_text">
+            <p className="profile_name">{props.profileName}</p>
+          </div>
+          <span>님 외 100명이 좋아합니다.</span>
+        </div>
+        <div className="comments">
+          <div className="comment_example">
+            <span className="profile_name">canon mj</span>
+            <span>여기는 뉴 화이트 하트 레인!!</span>
+            <a href="" className="profile_desc">
+              더 보기
+            </a>
+          </div>
+          {props.array.map((comment, index) => (
+            <CommentAdd
+              comment={comment}
+              key={index}
+              clickLike={props.clickLike}
+              deleteComment={props.deleteComment}
+            />
+          ))}
+        </div>
+
+        <span className="comment_personal profile_desc">42분 전</span>
+
+        <form className="input_comment" onSubmit={props.summit}>
+          <input
+            type="text"
+            placeholder="댓글 달기..."
+            className="comment_box"
+            onChange={props.getComment}
+          />
+          <button className="upload_btn">게시</button>
+        </form>
+      </article>
     </div>
   );
 };
