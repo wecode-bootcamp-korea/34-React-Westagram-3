@@ -185,6 +185,9 @@
                     font-weight: 900;
                     padding-right: 10px;
                   }
+                  .commentContent {
+                    max-width: 50px;
+                  }
 
                   .commentLike {
                     font-size: 14px;
@@ -192,6 +195,10 @@
                     cursor: pointer;
                     position: absolute;
                     left: 95%;
+
+                    .commentLikeTrue {
+                      color: #ed4956;
+                    }
                   }
 
                   .commentDelete {
@@ -394,15 +401,16 @@
             }
           }
         }
+        footer {
+          p {
+            letter-spacing: -0.4px;
+            font-size: 12px;
+            color: #9c9c9c;
+            margin-bottom: 6px;
+          }
+        }
       }
     }
-  }
-
-  p {
-    letter-spacing: -0.4px;
-    font-size: 12px;
-    color: #9c9c9c;
-    margin-bottom: 6px;
   }
 }
 

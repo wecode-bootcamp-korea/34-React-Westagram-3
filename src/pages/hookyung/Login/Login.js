@@ -9,19 +9,29 @@ const LoginHooKyung = () => {
   const [pw, setPw] = useState('');
   const [buttonStatus, setButtonStatus] = useState(false);
   const [buttonColor, setButtonColor] = useState(0.3);
-
   function handleInputId(e) {
     setID(e.target.value);
   }
   function handleInputPw(e) {
     setPw(e.target.value);
   }
-  console.log(id);
-  console.log(pw);
 
-  function gotoMain() {
-    navigate('/main-hookyung');
+  function login() {
+    // navigate('/main-hookyung');
+
+    fetch('http://10.58.0.118:8000/users/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: id,
+        password: pw,
+      }),
+    })
+      .then(response => response.json())
+      .then(
+        result => localStorage.setItem('ACCESS_TOKEN', result.ACCESS_TOKEN) // 객체 형태니까  result.ACCESS_TOKEN 객체 접근 방법으로 할것
+      );
   }
+
   useEffect(() => {
     id.includes('@') && pw.length >= 5
       ? setButtonStatus(false)
@@ -49,7 +59,7 @@ const LoginHooKyung = () => {
             className="loginButton"
             type="button"
             disabled={buttonStatus}
-            onClick={gotoMain}
+            onClick={login}
           >
             로그인
           </button>

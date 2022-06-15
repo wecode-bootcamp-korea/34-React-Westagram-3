@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import './main.scss';
 const MainHooKyung = () => {
   const [comment, setComment] = useState();
-  const [commentList, setCommentList] = useState([{ id: 1, txt: '댓글' }]);
-
+  const [commentList, setCommentList] = useState([]);
+  const [commentListJson, setCommentListJson] = useState([]);
   const [userId, setUserID] = useState(0);
   const [feedLike, setFeedLike] = useState(false);
 
+  useEffect(() => {
+    fetch('data/commentData.json')
+      .then(res => res.json())
+      .then(data => {
+        setCommentListJson(data);
+      });
+  }, []);
+
+  console.log(commentListJson);
   // 댓글 저장
   function addComment(e) {
     setComment(e.target.value);
@@ -179,6 +188,16 @@ const MainHooKyung = () => {
                 <div className="comments">
                   <div className="comment" />
                   {/* 댓글 반복 map */}
+                  {/* {commentListJson.map((el, i) => {
+                    return (
+                      <CommentListJson
+                        userCount={el.id}
+                        userId={el.userId}
+                        commentList={el.txt}
+                        isLiked={el.isLiked}
+                      />
+                    );
+                  })} */}
                   {commentList.map((el, i) => {
                     return (
                       <CommentList
@@ -388,7 +407,7 @@ function CommentList(props) {
           {addCommentLike === false ? (
             <i class="fa-regular fa-heart" />
           ) : (
-            <i class="fa-solid fa-heart" style={{ color: 'red' }} />
+            <i class="fa-solid fa-heart commentLikeTrue " />
           )}
         </span>
         <button className="commentDelete" onClick={commentDelete}>
@@ -398,5 +417,24 @@ function CommentList(props) {
     </div>
   );
 }
-
+// function CommentListJson(props) {
+//   return (
+//     <div className="comment">
+//       <div className="commentView" key={props.commentList.id}>
+//         <span className="commentUserId">sald__ssaed_{props.userId}</span>
+//         <span className="commentContent"> {props.commentList}</span>
+//         <span className="commentLike" onClick={props.commentLike}>
+//           {/* {props.commentLike === false ? (
+//             <i class="fa-regular fa-heart" />
+//           ) : (
+//             <i class="fa-solid fa-heart commentLikeTrue " />
+//           )} */}
+//         </span>
+//         {/* <button className="commentDelete" onClick={commentDelete}>
+//           x
+//         </button> */}
+//       </div>
+//     </div>
+//   );
+// }
 export default MainHooKyung;
