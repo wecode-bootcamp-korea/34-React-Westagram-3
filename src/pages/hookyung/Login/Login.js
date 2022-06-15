@@ -27,9 +27,15 @@ const LoginHooKyung = () => {
       }),
     })
       .then(response => response.json())
-      .then(
-        result => localStorage.setItem('ACCESS_TOKEN', result.ACCESS_TOKEN) // 객체 형태니까  result.ACCESS_TOKEN 객체 접근 방법으로 할것
-      );
+      .then(result => {
+        console.log('result:', result);
+        localStorage.setItem('ACCESS_TOKEN', result.ACCESS_TOKEN);
+        if (localStorage.getItem('ACCESS_TOKEN') === result.ACCESS_TOKEN) {
+          navigate('/main-hookyung');
+        } else {
+          alert('아이디 패스워드 확인해주세요');
+        }
+      }); // 객체 형태니까  result.ACCESS_TOKEN 객체 접근 방법으로 할것
   }
 
   useEffect(() => {
