@@ -6,6 +6,16 @@ import './login.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
+// fetch('10.58.5.166:8000/users/signin', {
+//   method: 'POST',
+//   body: JSON.stringify({
+//     email: 'exam@naver.com',
+//     password: 'Exam123!',
+//   }),
+// })
+//   .then(response => response.json())
+//   .then(result => console.log('결과: ', result));
+
 function LoginBox(props) {
   return (
     <article className="loginBox">
@@ -16,6 +26,21 @@ function LoginBox(props) {
         className="loginForm"
         onSubmit={event => {
           event.preventDefault();
+
+          fetch('http://10.58.5.166:8000/users/signin', {
+            method: 'POST',
+            body: JSON.stringify({
+              email: 'exam@naver.com',
+              password: 'Exam123!',
+            }),
+          })
+            .then(response => response.json())
+            .then(result => {
+              if (result.access_token) {
+                localStorage.setItem('token', result.access_token);
+                console.log(result.access_token);
+              }
+            });
           props.goToMain(props.loginId, props.passwordId);
         }}
       >
