@@ -18,6 +18,20 @@ const LoginYeJi = () => {
   const [btnDisabled, setBtnDisabled] = useState('disabled');
   const handleSubmit = e => {
     e.preventDefault();
+    fetch('http://10.58.5.166:8000/users/signin', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: 'jeong9204@gmail.com',
+        password: '@Wecode1234',
+      }),
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (result.access_token) {
+          localStorage.setItem('token', result.access_token);
+          console.log(result.access_token);
+        }
+      });
     navigate('/main-yeji');
   };
   const handleCheange = () => {

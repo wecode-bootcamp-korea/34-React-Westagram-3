@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 const CommentList = props => {
   const commentList = props.commentCntList;
   const [heartBtn, setHeartBtn] = useState(false);
-  let isheartBtn = true;
   return (
     <>
       {commentList.map((commentText, i) => (
