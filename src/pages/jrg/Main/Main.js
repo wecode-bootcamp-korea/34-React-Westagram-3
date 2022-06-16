@@ -1,13 +1,31 @@
 import React, { createElement, useState, useEffect } from 'react';
+import SearchProfile from './SearchProfile';
 import './main.scss';
-import data from './UserData';
+
+const IMGS = [
+  {
+    id: 1,
+    src: 'https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/explore.png',
+    alt: 'compass',
+    className: 'logo_header',
+  },
+  {
+    id: 2,
+    src: 'https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/heart.png',
+    alt: 'like',
+    className: 'logo_header',
+  },
+  {
+    id: 3,
+    src: 'https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/profile.png',
+    alt: 'friends',
+    className: 'logo_header',
+  },
+];
 
 const Main = () => {
   const [comment, setComment] = useState('');
-
-  //댓글 창 더하기
   const [array, setArray] = useState([]);
-
   const [modal, setModal] = useState('close');
 
   //   const [searchValue, setSearchValue] = useState([]);
@@ -35,24 +53,7 @@ const Main = () => {
       modal === 'open' ? setModal('close') : setModal('open');
     }
   };
-
-  const SearchProfile = () => {
-    return (
-      <div className={modal === 'open' ? 'search' : 'searchHide'}>
-        <div className="profile_collect">
-          <img
-            src="https://cdne-totv8-prod.azureedge.net/media/40824/firstteam_heungminson_2021_22.png?anchor=center&mode=crop&quality=100&width=500"
-            alt="profile"
-            className="profile_normal"
-          />
-          <div className="profile_text">
-            <p className="profile_name">_yum_s</p>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
+  //리뷰 해서 올려드리기~
   const getComment = event => {
     event.preventDefault();
     setComment(event.target.value);
@@ -93,24 +94,19 @@ const Main = () => {
           placeholder="&#128269; 검 색 "
           onClick={onClickSearch}
           //   onChange={searchMatch}
-        ></input>
-        <SearchProfile></SearchProfile>
+        />
+        <SearchProfile modal={modal} />
         <div className="header_logos">
-          <img
-            src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/explore.png"
-            alt="compass"
-            className="logo_header"
-          />
-          <img
-            src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/heart.png"
-            alt="like"
-            className="logo_header"
-          />
-          <img
-            src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/profile.png"
-            alt="friends"
-            className="logo_header"
-          />
+          {IMGS.map(imgData => {
+            return (
+              <img
+                key={imgData.id}
+                src={imgData.src}
+                alt={imgData.alt}
+                className={imgData.className}
+              />
+            );
+          })}
         </div>
       </header>
       <section className="section">
@@ -346,13 +342,13 @@ const Main = () => {
   );
 };
 
-const CommentAdd = props => {
+const CommentAdd = ({ num, comment, deleteComment, clickLike }) => {
   return (
-    <div className="comment_personal" id={props.num} key={props.num}>
-      <div key={props.num}>
+    <div className="comment_personal" id={num} key={num}>
+      <div key={num}>
         <span className="profile_name_comment">iamaboyyouarea</span>
-        <span>{props.comment}</span>
-        <span className="del_comment" onClick={props.deleteComment}>
+        <span>{comment}</span>
+        <span className="del_comment" onClick={deleteComment}>
           X
         </span>
       </div>
@@ -360,8 +356,8 @@ const CommentAdd = props => {
         src="https://ifh.cc/g/b41PGW.png"
         alt="like"
         className="comment_size"
-        onClick={props.clickLike}
-      ></img>
+        onClick={clickLike}
+      />
     </div>
   );
 };
