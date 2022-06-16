@@ -1,48 +1,50 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.scss';
+
+const ERROR_MESSAGE = {
+  'INVALID EMAIL': '아이디 혹은 비밀번호를 확인 해 주세요',
+  'INVALID PASSWORD': '아이디 혹은 비밀번호를 확인 해 주세요',
+  'NOT EXISTS USER': '없는 유저 입니다',
+};
+
 const LoginHooKyung = () => {
+  const [userInfo, setUserInfo] = useState({ userId: '', userPw: '' });
+
   const navigate = useNavigate();
-  const [id, setID] = useState('');
-  const [pw, setPw] = useState('');
-  const [buttonStatus, setButtonStatus] = useState(false);
-  const [buttonColor, setButtonColor] = useState(0.3);
-  function handleInputId(e) {
-    setID(e.target.value);
-  }
-  function handleInputPw(e) {
-    setPw(e.target.value);
-  }
 
-  function login() {
-    // navigate('/main-hookyung');
+  const { userId, userPw } = userInfo;
 
+  const getUserInfo = e => {
+    const { value, name } = e.target;
+    setUserInfo({ [name]: value });
+  };
+
+  // const isValid = userId.length > 5 && userPw.length >= 5;
+
+  const login = () => {
     fetch('http://10.58.0.118:8000/users/login', {
       method: 'POST',
       body: JSON.stringify({
-        email: id,
-        password: pw,
+        email: userId,
+        password: userPw,
       }),
     })
-      .then(response => response.json())
-      .then(result => {
-        console.log('result:', result);
-        localStorage.setItem('ACCESS_TOKEN', result.ACCESS_TOKEN);
-        if (localStorage.getItem('ACCESS_TOKEN') === result.ACCESS_TOKEN) {
-          navigate('/main-hookyung');
-        } else {
-          alert('아이디 패스워드 확인해주세요');
+      .then(response => {
+        if (response.ok === true) {
+          return response.json();
         }
-      }); // 객체 형태니까  result.ACCESS_TOKEN 객체 접근 방법으로 할것
-  }
+        throw new Error('통신실패');
+      })
+      .then(result => {
+        if (result.ACCESS_TOKEN) {
+          localStorage.setItem('ACCESS_TOKEN', result.ACCESS_TOKEN);
+        }
+        alert(ERROR_MESSAGE[result.MESSAGE]);
+      })
+      .catch(error => console.log(error)); // 객체 형태니까  result.ACCESS_TOKEN 객체 접근 방법으로 할것
+  };
 
-  useEffect(() => {
-    id.includes('@') && pw.length >= 5
-      ? setButtonStatus(false)
-      : setButtonStatus(true);
-  }, [id, pw]);
   return (
     <main className="loginHookyung">
       <div className="loginBox">
@@ -50,21 +52,23 @@ const LoginHooKyung = () => {
         <form className="loginForm">
           <input
             className="loginID"
-            type="text"
+            type="email"
+            name="userId"
             placeholder="전화번호, 사용자 이름 또는 이메일"
-            onKeyUp={handleInputId}
+            onChange={getUserInfo}
           />
           <input
             className="loginPW"
             type="password"
+            name="userPw"
             placeholder="비밀번호"
-            onKeyUp={handleInputPw}
+            onChange={getUserInfo}
           />
 
           <button
             className="loginButton"
             type="button"
-            disabled={buttonStatus}
+            disabled={false}
             onClick={login}
           >
             로그인
