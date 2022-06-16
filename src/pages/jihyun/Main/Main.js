@@ -1,10 +1,7 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import Feed from './Feed';
 import names from '../datas/names';
 import './main.scss';
-import '../../../styles/reset.scss';
-import '../../../styles/common.scss';
-import Feed from './Feed';
 
 const MainJiHyun = () => {
   const [feedsDATA] = useState([
@@ -39,7 +36,6 @@ const MainJiHyun = () => {
 
   return (
     <div id="mainContainer">
-      {/* <!-- 1.상위 네이게이터 --> */}
       <nav>
         <div id="navBoxs">
           <div className="navBox" id="leftNav">
@@ -54,7 +50,6 @@ const MainJiHyun = () => {
               <span className="MainWestagram">westagram</span>
             </p>
           </div>
-
           <div className="navBox" id="middleNav">
             <p>
               <input
@@ -66,7 +61,6 @@ const MainJiHyun = () => {
               />
             </p>
 
-            {/* 검색창 */}
             <div id="searchIdWeapper" className={searchShow ? '' : 'boxShow'}>
               <div id="searchId">
                 {searchList.map((el, idx) => {
@@ -85,7 +79,6 @@ const MainJiHyun = () => {
               </div>
             </div>
           </div>
-
           <div className="navBox" id="rightNav">
             <p>
               <img
@@ -112,8 +105,6 @@ const MainJiHyun = () => {
               </button>
             </p>
           </div>
-
-          {/* <!--2.메뉴박스 --> */}
           <div id="menuBox" className={menuIsShow ? null : 'hidden'}>
             <button>프로필</button>
             <button>저장됨</button>
@@ -123,11 +114,8 @@ const MainJiHyun = () => {
           </div>
         </div>
       </nav>
-      {/* <!-- 3. 피드 본문 -->  */}
       <main>
-        {/* <!-- 2.프로필 메뉴 박스--> */}
         <div id="feedWrapper">
-          {/* <!-- 2-1.왼쪽 게시글피드 --> */}
           {feedsDATA.map(el => (
             <Feed
               key={el.id}
@@ -139,10 +127,8 @@ const MainJiHyun = () => {
             />
           ))}
         </div>
-        {/* <!-- 3.오른쪽 스토리피드 --> */}
         <section id="mainRightWrapper">
           <div className="mainRight">
-            {/* <!-- 오른쪽 top --> */}
             <div className="userTemplate">
               <p>
                 <img src="./images/jihyun/wecode.jpeg" alt="wecodeLogo" />
@@ -152,7 +138,6 @@ const MainJiHyun = () => {
                 <p>WeCode ㅣ 위코드</p>
               </div>
             </div>
-            {/* <!-- 스토리 영역 --> */}
             <div className="story">
               <p className="storyTitle">
                 <span className="gray">스토리</span>
@@ -207,7 +192,6 @@ const MainJiHyun = () => {
               </div>
             </div>
 
-            {/* <!-- 추천영역 --> */}
             <div className="story recommend">
               <p className="storyTitle">
                 <span className="gray">회원님을 위한 추천</span>
@@ -246,7 +230,6 @@ const MainJiHyun = () => {
                 </div>
               </div>
             </div>
-            {/* <!-- 카피라이트 부분 --> */}
             <div id="copyRight">
               <p>Instagram 정보·지원·홍보 센터·API· </p>
               <p>채용 정보·개인정보처리방침·약관·</p>

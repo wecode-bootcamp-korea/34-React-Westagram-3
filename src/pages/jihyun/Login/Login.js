@@ -1,29 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import '../../../styles/reset.scss';
-import '../../../styles/common.scss';
 import './login.scss';
 
 const LoginJiHyun = () => {
-  const navigate = useNavigate(); // navigate1
   const [loginInfo, setLoginInfo] = useState({ name: '', password: '' });
   const [bolderValue, setBolderValue] = useState({
     idBolder: 'valid',
     pwBolder: 'valid',
   });
-  const [placeholderValue, setPlaceholderValue] = useState({
+  const [placehoderValue, setPlacehoderValue] = useState({
     idPlaceHolder: '전화번호, 사용자 이름 또는 이메일',
     pwPlaceHolder: '비밀번호 6자리 이상',
   });
 
-  // <1. id, password 입력값 받아오는 객체값 객체로 만듦>
+  const navigate = useNavigate();
+
   const onInput = e => {
+    const { name, value } = e.target;
+
     setLoginInfo(prev => {
-      return { ...prev, [e.target.name]: e.target.value };
+      return { ...prev, [name]: value };
     });
 
-    // <2. 로그인 인풋 보더 > - 처음과 값 있을시 valid (유효성 미통과시 red로 되기때문에 다시 돌려주기 위해)
     if (loginInfo.name !== '') {
       setBolderValue(prev => ({ ...prev, idBolder: 'valid' }));
     }
@@ -32,7 +30,6 @@ const LoginJiHyun = () => {
     }
   };
 
-  // 3.Submit시 id, pw 유효성 검사 - id : @를 포한한 6자리 이상 / pw : 6자리 이상
   const onSubmit = e => {
     e.preventDefault();
 
@@ -40,27 +37,24 @@ const LoginJiHyun = () => {
       return;
     }
 
-    // 4. 아이디 유효성 미통과시 - placeholder 경고 ,bolder 레드로
     if (loginInfo.name.length < 6 || !loginInfo.name.includes('@')) {
       setLoginInfo(prev => ({ ...prev, name: '' }));
       setBolderValue(prev => ({ ...prev, idBolder: 'unvalid' }));
-      setPlaceholderValue(prev => ({
+      setPlacehoderValue(prev => ({
         ...prev,
         idPlaceHolder: '@를 포함한, 6자리 이상!',
       }));
     }
 
-    // 4. 비번 유효성 미통과시 - placeholder 경고 ,bolder 레드로
     if (loginInfo.password.length < 6) {
       setLoginInfo(prev => ({ ...prev, password: '' }));
       setBolderValue(prev => ({ ...prev, pwBolder: 'unvalid' }));
-      setPlaceholderValue(prev => ({
+      setPlacehoderValue(prev => ({
         ...prev,
         pwPlaceHolder: '6자리 이상!',
       }));
     }
 
-    // 5. 유효성 통과시 - submit 후, main으로 이동하기
     if (
       loginInfo.name.length >= 6 &&
       loginInfo.name.includes('@') &&
@@ -78,7 +72,7 @@ const LoginJiHyun = () => {
         <form id="loginForm" onSubmit={onSubmit}>
           <input
             type="text"
-            placeholder={placeholderValue.idPlaceHolder}
+            placeholder={placehoderValue.idPlaceHolder}
             className={bolderValue.idBolder}
             name="name"
             value={loginInfo.name}
@@ -86,7 +80,7 @@ const LoginJiHyun = () => {
           />
           <input
             type="password"
-            placeholder={placeholderValue.pwPlaceHolder}
+            placeholder={placehoderValue.pwPlaceHolder}
             className={bolderValue.pwBolder}
             name="password"
             value={loginInfo.password}

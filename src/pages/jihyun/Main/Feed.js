@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Comments from './Comment';
 
 function Feed({ id, writerId, writerImg, feedImg, feedText }) {
@@ -45,7 +44,6 @@ function Feed({ id, writerId, writerImg, feedImg, feedText }) {
       </header>
       <img src={feedImg} alt="giraffe" className="giraffe" />
       <div id="feedBottomContents">
-        {/* <!-- 피드 하단 내용 - 아이콘들 --> */}
         <div className="imgIcons">
           <section className="imgIconsLeft">
             <p>
@@ -133,7 +131,6 @@ function Feed({ id, writerId, writerImg, feedImg, feedText }) {
             />
           </svg>
         </div>
-        {/* <!-- 피드 하단 내용 - 좋아요 누른 내용 --> */}
         <div className="likeMessage">
           <img src={writerImg} alt="likes" />
           <p>
@@ -141,7 +138,6 @@ function Feed({ id, writerId, writerImg, feedImg, feedText }) {
             <span className="thick"> 외 10명</span>이 좋아합니다.
           </p>
         </div>
-        {/* <!-- 피드 하단 내용 - 피드 하단 작성글 내용 --> */}
         <p className="feedText">
           <span className="thick">{writerId} </span>
           {feedText}
@@ -163,7 +159,6 @@ function Feed({ id, writerId, writerImg, feedImg, feedText }) {
           })}
         </ul>
       </section>
-
       <form className="contentForm" onSubmit={onSubmit}>
         <input
           placeholder="댓글 달기..."
