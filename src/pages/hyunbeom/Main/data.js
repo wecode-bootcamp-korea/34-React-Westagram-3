@@ -1,6 +1,9 @@
+// 상수데이터라면 const로 선언해야 하고, Naming convention도 UPPER_SNAKE_CASE 로 이름 지어야 합니다.
+// 개발에 모든 정보는 value 이고 data 입니다. 어떤 data인지 명확하게 이름 지어주세요
+// id 1 부터 시작하게 변경했습니다
 let data = [
   {
-    id: 0,
+    id: 1,
     pic: '/images/hyunbeom/wecode.jpeg',
     title: 'wecode_bootcamp',
     content: 'WeCode | 위코드',
@@ -15,7 +18,7 @@ let data = [
   },
 
   {
-    id: 1,
+    id: 2,
     pic: '/images/hyunbeom/user1.jpeg',
     title: 'Brad_Pitt',
     content: 'I am happy',
@@ -30,7 +33,7 @@ let data = [
   },
 
   {
-    id: 2,
+    id: 3,
     pic: '/images/hyunbeom/user2.jpeg',
     title: 'Angelina_Jolie',
     content: 'I am glad to hear that',
@@ -44,7 +47,7 @@ let data = [
     feedFirstChat: '',
   },
   {
-    id: 3,
+    id: 4,
     pic: '/images/hyunbeom/user3.jpeg',
     title: 'Don_Lee',
     content: '진실의 방으로',
@@ -58,7 +61,7 @@ let data = [
     feedFirstChat: '',
   },
   {
-    id: 4,
+    id: 5,
     pic: '/images/hyunbeom/user4.jpeg',
     title: 'Mr_Goo',
     content: '추앙해요',
@@ -72,7 +75,7 @@ let data = [
     feedFirstChat: '',
   },
   {
-    id: 5,
+    id: 6,
     pic: '/images/hyunbeom/user5.jpeg',
     title: 'Tom_Holland',
     content: '회원님을 위한 추천',
@@ -87,7 +90,7 @@ let data = [
   },
 
   {
-    id: 6,
+    id: 7,
     pic: '/images/hyunbeom/user6.jpeg',
     title: 'Chris_Hemsworth',
     content: 'Instagram 신규 가입',
@@ -101,7 +104,7 @@ let data = [
     feedFirstChat: '',
   },
   {
-    id: 7,
+    id: 8,
     pic: '/images/hyunbeom/user7.jpeg',
     title: 'Chris_Pratt',
     content: 'Instagram 신규 가입',
@@ -115,7 +118,7 @@ let data = [
     feedFirstChat: '',
   },
   {
-    id: 8,
+    id: 9,
     pic: '/images/hyunbeom/wecode3.jpeg',
     title: 'wecode_korea',
     content: '',
@@ -129,7 +132,7 @@ let data = [
     feedFirstChat: '',
   },
   {
-    id: 9,
+    id: 10,
     pic: '/images/hyunbeom/myPhoto.jpeg',
     title: 'wecode_hyunbeom',
     content: 'hi there',
@@ -143,7 +146,7 @@ let data = [
     feedFirstChat: '',
   },
   {
-    id: 10,
+    id: 11,
     pic: '/images/hyunbeom/wecode2.jpeg',
     title: 'Wecode',
     content: '강남구 테헤란로 427 서울',
@@ -157,7 +160,7 @@ let data = [
     feedFirstChat: '',
   },
   {
-    id: 11,
+    id: 12,
     pic: '/images/hyunbeom/myPhoto.jpeg',
     title: 'hyunbeom_hi',
     content: '',
@@ -171,7 +174,7 @@ let data = [
     feedFirstChat: '귀엽게 잘 만들었네',
   },
   {
-    id: 12,
+    id: 13,
     pic: '/images/hyunbeom/user8.jpeg',
     title: 'Tom_Holland',
     content: '',
@@ -185,7 +188,7 @@ let data = [
     feedFirstChat: 'So exciting',
   },
   {
-    id: 13,
+    id: 14,
     pic: '/images/hyunbeom/user9.jpeg',
     title: 'Robert_Downey_Jr',
     content: '',
