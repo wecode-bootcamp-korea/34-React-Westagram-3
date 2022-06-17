@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 
+//이 컴포넌트 안에서 댓글이 commentList배열의 수 만큼 생성되고 있는데, 모든 like가 하나의 state를 바라보고 있어서 한번에 켜지고 한번에 꺼지는 현상이 생깁니다.
+//이 경우, 컴포넌트 내에서 map을 호출하기보다, 컴포넌트 자체를 map으로 생성하는게 맞겠습니다.
+//그래야 댓글하나씩 개별적으로 컴포넌트가 생기는거고, 각각의 state는 독립적으로 쓰일 수 있습니다.
+
 const CommentList = props => {
   const commentList = props.commentCntList;
   const [heartBtn, setHeartBtn] = useState(false);

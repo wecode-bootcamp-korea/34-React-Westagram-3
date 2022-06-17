@@ -1,35 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CommentList from './CommentList';
 import './main.scss';
 
 const MainYeJi = () => {
   const [commentText, setCommentText] = useState('');
+  const [commentCntList, setCommentCntList] = useState([]);
+  // const [commentBtn, setcommentBtn] = useState('rgba(0, 149, 246, 0.3)');
+  // const [btnDisabled, setBtnDisabled] = useState('disabled');
+  //전역에서 변수 선언하는것보다 참조해야할 scope 기준으로 선언해 주는게 스코프 오염을 줄이는데 좋습니다.
+  const copyList = [...commentCntList];
+
+  //input에 입력된 댓글 값을 가져오기때문에, 함수이름은 getCommentValue가 좀더 어울려보입니다.
   const commentTextInput = event => {
     setCommentText(event.target.value);
   };
-  const [commentCntList, setCommentCntList] = useState([]);
-  const [commentBtn, setcommentBtn] = useState('rgba(0, 149, 246, 0.3)');
-  const [btnDisabled, setBtnDisabled] = useState('disabled');
-  const copyList = [...commentCntList];
 
   const handleSubmit = e => {
     e.preventDefault();
-    copyList.push(commentText);
-    setCommentCntList(copyList);
+    if (commentText.length === 0) return;
+
+    //setCommentCntList에 직접 스프레드 연산자로 추가하는 방법이 있습니다.
+    // copyList.push(commentText);
+    setCommentCntList([...commentCntList, commentText]);
     setCommentText('');
   };
 
-  const handleCheange = () => {
-    if (commentText) {
-      setcommentBtn('#0095f6');
-      setBtnDisabled('');
-    } else {
-      setcommentBtn('rgba(0, 149, 246, 0.3)');
-      setBtnDisabled('disabled');
-    }
-  };
-  useEffect(handleCheange, [commentText]);
+  //이 함수는 button 컬러를 둘중에 하나로 바꾸는 기능과
+  //button disabled를 한번에 처리하는 함수 로 보입니다.
+  //업데이트하는 컬러와 disabled 속성 모두 "둘중에 하나" 로 값이 결정됩니다.
+  //연한색 아니면 진한색
+  //disabled 아니면 abled
+  //이런 값은 조건에 따라 해당 attribute에서 삼항연산자로 바로 처리해줄 수 있습니다. 함수없이.
+
+  // const handleCheange = () => {
+  //   if (commentText) {
+  //     setcommentBtn('#0095f6');
+  //     setBtnDisabled('');
+  //   } else {
+  //     setcommentBtn('rgba(0, 149, 246, 0.3)');
+  //     setBtnDisabled('disabled');
+  //   }
+  // };
+  //위의 함수를 동작시키기 위한 useEffect여서 함수가 없다면 이 useEffect도 없어도 됩니다.
+  // useEffect(handleCheange, [commentText]);
 
   return (
     <div className="wrap">
@@ -85,6 +99,7 @@ const MainYeJi = () => {
         <div className="feeds-wrap">
           <div className="story-wrap">
             <div className="items">
+              {/* 여기부터 */}
               <div className="item">
                 <div className="img">
                   <img src="/images/yeji/img1.jpg" alt="" />
@@ -121,6 +136,9 @@ const MainYeJi = () => {
                 </div>
                 <div className="name">jeong9204</div>
               </div>
+              {/* 여기까지 
+              ui가 반복되는 코드는 데이터 구조 만들고, map 으로 구현 해 보세요!
+              */}
             </div>
           </div>
           <div className="feeds">
@@ -355,10 +373,16 @@ const MainYeJi = () => {
                       value={commentText}
                     />
                     <button
-                      style={{ color: commentBtn }}
+                      style={{
+                        color:
+                          commentText === ''
+                            ? 'rgba(0, 149, 246, 0.3)'
+                            : '#0095f6',
+                      }}
                       className="comm-btn"
                       type="submit"
-                      disabled={btnDisabled}
+                      //disalbed 속성으로 막을 수 도 있지만, input의 값에 따라 comment가 입력되지 않게 return 해서 함수가 더이상 동작하지 않게 하는 방법도 있습니다.
+                      // disabled={btnDisabled}
                     >
                       게시
                     </button>
@@ -389,6 +413,7 @@ const MainYeJi = () => {
           <div className="recommend-wrap">
             <div className="title">회원님을 위한 추천</div>
             <ul>
+              {/* 여기부터 */}
               <li>
                 <div className="img">
                   <img src="/images/yeji/img1.jpg" alt="" />
@@ -449,6 +474,9 @@ const MainYeJi = () => {
                   <a href="/">팔로우</a>
                 </div>
               </li>
+              {/* 여기까지 
+              ui 반복되기때문에 map 으로 구현 해 보세요!
+              */}
             </ul>
             <div className="more">
               <a href="/">모두 보기</a>
@@ -457,6 +485,7 @@ const MainYeJi = () => {
           <div className="addr-box">
             <div className="quick-link">
               <ul>
+                {/* 여기부터 */}
                 <li>
                   <a href="/">소개</a>
                 </li>
@@ -490,6 +519,7 @@ const MainYeJi = () => {
                 <li>
                   <a href="/">언어</a>
                 </li>
+                {/* 여기까지 map 으로 구현 해 보세요! */}
               </ul>
             </div>
             <address>&copy; 2022 INSTAGRAM FROM META</address>
