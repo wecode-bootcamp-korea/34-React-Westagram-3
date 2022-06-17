@@ -23,13 +23,17 @@ const IMGS = [
   },
 ];
 
+//복잡한 코드여서 날잡고 리팩토링 해보시는걸 추천드립니다..
 const Main = () => {
   const [comment, setComment] = useState('');
+  //어떤 array인지 명확하면 좋겠습니다.
   const [array, setArray] = useState([]);
-  const [modal, setModal] = useState('close');
-
+  const [modal, setModal] = useState(false);
   //   const [searchValue, setSearchValue] = useState([]);
+  //개발에서 다루는 모든 정보는 data이고 value입니다.
+  //제3자가 코드를 봤을 때 어떤 데이터가 들어있을지 변수만 보고 알 수 있도록 이름 짓는것도 좋은 코드를 만드는 방법입니다.
   const [dataList, setDataList] = useState([]);
+  const [id, setId] = useState(10);
 
   // const searchMatch = e => {
   //   console.log(e.target.value);
@@ -48,23 +52,41 @@ const Main = () => {
       });
   }, []);
 
-  const onClickSearch = () => {
-    {
-      modal === 'open' ? setModal('close') : setModal('open');
-    }
+  //서치바를 누르면 modal이 나오게 하는 함수인데, className으로 보이고 안보이고 조정 하는것으로 생각됩니다.
+  //이것도 삼항연산자로 true 일때 모달 UI 가 보이고, false일때 안보이게 UI 부분에서 직접 코딩 해 주시고
+  // 이 함수는 서치바를 클릭했을 때 true false만 바꿔주는 setState만 있으면 됩니다.
+  // const onClickSearch = () => {
+  //   {
+  //     modal === 'open' ? setModal('close') : setModal('open');
+  //   }
+  // };
+
+  const toggleSearchBar = () => {
+    setModal(!modal);
   };
-  //리뷰 해서 올려드리기~
+
   const getComment = event => {
     event.preventDefault();
     setComment(event.target.value);
   };
 
-  const summit = e => {
-    e.preventDefault();
-    setArray(enters => [...enters, comment]);
-    e.target.reset();
+  const makeComment = event => {
+    event.preventDefault();
+    setArray([...array, comment]);
+    setComment('');
   };
 
+  const summit = e => {
+    e.preventDefault();
+    //함수형 업데이트는 이전의 값을 참조해서 업데이트할 때 필요한 업데이트 방식입니다.
+    //무조건 함수형 업데이트를 해야 하는건 아닙니다. 목적에 맞게 선택해서 업데이트 해주시면 되겠습니다.
+    setDataList([...dataList, { comment, id }]);
+    //reset() 보단, input의 value를 초기화 해주는 setState를 사용하는게 올바른 방법이겠습니다.
+    // e.target.reset();
+    setId(id + 1);
+  };
+
+  //이 함수도 true false 만 바꿔주고, src의 주소만 삼항연산자로 갈아껴지게 하면 되겠습니다.
   const clickLike = e => {
     if (e.target.src === 'https://ifh.cc/g/L7KsFY.png') {
       e.target.src = 'https://ifh.cc/g/b41PGW.png';
@@ -73,6 +95,7 @@ const Main = () => {
     }
   };
 
+  //element를 직접 지우는것보다, comment가 저장되 있는 배열에서 filter메서드를 이용해 배열에서 빼고, 새로운 배열을 랜더링하는, 그리고 불변성을 지키는게 리액트적인 사고 방식으로 개발하는 방법입니다.
   const deleteComment = e => {
     e.target.parentNode.parentNode.remove();
   };
@@ -92,10 +115,11 @@ const Main = () => {
           type="text"
           className="header_input"
           placeholder="&#128269; 검 색 "
-          onClick={onClickSearch}
+          onClick={toggleSearchBar}
           //   onChange={searchMatch}
         />
-        <SearchProfile modal={modal} />
+        {/* // &&, || 단축평가 연산자를 찾아보세요! */}
+        {modal && <SearchProfile />}
         <div className="header_logos">
           {IMGS.map(imgData => {
             return (
@@ -111,6 +135,7 @@ const Main = () => {
       </header>
       <section className="section">
         <div className="left_div">
+          {/* map의 매개변수 자리는 어떤 데이터가 들어오는지 유추하기 쉬운 매개변수로 적어주세요. a는 어떤 데이터가 들어올지 예상하기 정말 어렵습니다. */}
           {dataList.map((a, i) => (
             <FeedAdd
               key={i}
@@ -118,13 +143,22 @@ const Main = () => {
               profileImage={a.profileImg}
               commentValue={a.commentValue}
               feedImg={a.feedImg}
+              array={array}
+              comment={comment}
+              makeComment={makeComment}
               getComment={getComment}
               summit={summit}
               deleteComment={deleteComment}
               clickLike={clickLike}
-              array={array}
             />
           ))}
+          {/* 주석은 남겨놓지 않는것이 좋습니다. 
+          코드만 봐도 어떤 코드인지 알 수 있는 코드가 좋은 코드 입니다.
+          피치못하게 주석을 사용해야 한다면, TODO,FIXME를 활용 해 주세요 */}
+          {/* TODO:나중에 지울 코드 
+          
+          이렇게요
+          */}
           {/* <article>
             <div className="profile_head">
               <div className="profile_collect">
@@ -238,6 +272,7 @@ const Main = () => {
               <span className="profile_desc">스토리</span>
               <span className="profile_name">모두 보기</span>
             </div>
+            {/* profile_collect 라는 div 덩어리가 여러번 반복되고 있습니다. 반복되는 ui는 map 으로 구현 해 보세요. */}
             <div className="profile_collect">
               <img
                 src="https://cdne-totv8-prod.azureedge.net/media/40824/firstteam_heungminson_2021_22.png?anchor=center&mode=crop&quality=100&width=500"
@@ -342,9 +377,11 @@ const Main = () => {
   );
 };
 
+//컴포넌트는 파일 단위로 나눠 주세요.
 const CommentAdd = ({ num, comment, deleteComment, clickLike }) => {
   return (
     <div className="comment_personal" id={num} key={num}>
+      {/* //key는 map에서 반환하는 element에 부여해 줍니다. */}
       <div key={num}>
         <span className="profile_name_comment">iamaboyyouarea</span>
         <span>{comment}</span>
@@ -362,19 +399,27 @@ const CommentAdd = ({ num, comment, deleteComment, clickLike }) => {
   );
 };
 
-const FeedAdd = props => {
+const FeedAdd = ({
+  profileName,
+  profileImage,
+  commentValue,
+  feedImg,
+  array,
+  comment,
+  getComment,
+  summit,
+  deleteComment,
+  clickLike,
+  makeComment,
+}) => {
   return (
     <div className="article_div">
       <article className="article">
         <div className="profile_head">
           <div className="profile_collect">
-            <img
-              src={props.profileImage}
-              alt="profile"
-              className="profile_normal"
-            />
+            <img src={profileImage} alt="profile" className="profile_normal" />
             <div className="profile_text">
-              <p className="profile_name">{props.profileName}</p>
+              <p className="profile_name">{profileName}</p>
             </div>
           </div>
           <div className="logo_feed_right">
@@ -386,7 +431,7 @@ const FeedAdd = props => {
           </div>
         </div>
         <div className="img_box">
-          <img src={props.feedImg} alt="feed" className="feed_image" />
+          <img src={feedImg} alt="feed" className="feed_image" />
         </div>
         <div className="feed_bar">
           <div className="logo_feed_left">
@@ -421,7 +466,7 @@ const FeedAdd = props => {
             className="profile_small"
           />
           <div className="profile_text">
-            <p className="profile_name">{props.profileName}</p>
+            <p className="profile_name">{profileName}</p>
           </div>
           <span>님 외 100명이 좋아합니다.</span>
         </div>
@@ -433,24 +478,27 @@ const FeedAdd = props => {
               더 보기
             </a>
           </div>
-          {props.array.map((comment, index) => (
-            <CommentAdd
-              comment={comment}
-              key={index}
-              clickLike={props.clickLike}
-              deleteComment={props.deleteComment}
-            />
-          ))}
+          {array.map((comment, index) => {
+            return (
+              <CommentAdd
+                comment={comment}
+                key={index}
+                // clickLike={clickLike}
+                // deleteComment={deleteComment}
+              />
+            );
+          })}
         </div>
 
         <span className="comment_personal profile_desc">42분 전</span>
 
-        <form className="input_comment" onSubmit={props.summit}>
+        <form className="input_comment" onSubmit={makeComment}>
           <input
             type="text"
             placeholder="댓글 달기..."
             className="comment_box"
-            onChange={props.getComment}
+            value={comment || ''}
+            onChange={getComment}
           />
           <button className="upload_btn">게시</button>
         </form>

@@ -1,8 +1,8 @@
 import React from 'react';
 
-export const SearchProfile = ({ modal }) => {
+export const SearchProfile = () => {
   return (
-    <div className={modal === 'open' ? 'search' : 'searchHide'}>
+    <div className="search">
       <div className="profile_collect">
         <img
           src="https://cdne-totv8-prod.azureedge.net/media/40824/firstteam_heungminson_2021_22.png?anchor=center&mode=crop&quality=100&width=500"
